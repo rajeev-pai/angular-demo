@@ -1,1 +1,27 @@
-<h2>sign-up works!</h2>
+<div class="container">
+  <mat-card>
+    <form>
+      <mat-form-field class="full-width">
+        <mat-label>Email</mat-label>
+        <input type="email" matInput placeholder="Email">
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <mat-label>Username</mat-label>
+        <input type="text" matInput placeholder="Username">
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <mat-label>Password</mat-label>
+        <input type="password" matInput placeholder="Password">
+      </mat-form-field>
+
+      <p class="sign-up">
+        Already have an account?
+        <a class="link" routerLink="/login">Login</a>
+      </p>
+
+      <button mat-raised-button color="primary">Create Account</button>
+    </form>
+  </mat-card>
+</div>
