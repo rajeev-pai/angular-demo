@@ -1,0 +1,33 @@
+.container {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  mat-card {
+    width: 500px;
+
+    form {
+      display: flex;
+      flex-direction: column;
+
+      .sign-up {
+        text-align: center;
+
+        .link {
+          color: #3f51b5;
+          font-weight: 500;
+          cursor: pointer;
+        }
+      }
+
+      button {
+        
+      }
+    }
+  }
+
+  .full-width {
+    width: 100%;
+  }
+}
