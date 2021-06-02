@@ -3,14 +3,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Route } from '@angular/router';
 
-import { MatCardModule } from '@angular/material/card';
-import { MatInputModule } from '@angular/material/input';
-import { MatButtonModule } from '@angular/material/button';
-
 import { AppComponent } from './app.component';
 import { LoginComponent } from './auth/login/login.component';
 import { SignUpComponent } from './auth/sign-up/sign-up.component';
-import { AuthLayoutComponent } from './auth/layout/layout.component';
+
+import { AuthModule } from './auth/auth.module';
 
 const routes: Route[] = [
   {
@@ -26,17 +23,12 @@ const routes: Route[] = [
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
-    SignUpComponent,
-    AuthLayoutComponent,
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    MatCardModule,
-    MatInputModule,
-    MatButtonModule,
     RouterModule.forRoot(routes),
+    AuthModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
