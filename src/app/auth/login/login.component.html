@@ -2,12 +2,12 @@
   <form>
     <mat-form-field class="full-width">
       <mat-label>Username</mat-label>
-      <input type="text" matInput placeholder="Username">
+      <input [(ngModel)]="username" name="username" type="text" matInput placeholder="Username">
     </mat-form-field>
   
     <mat-form-field class="full-width">
       <mat-label>Password</mat-label>
-      <input type="password" matInput placeholder="Password">
+      <input [(ngModel)]="password" name="password" type="password" matInput placeholder="Password">
     </mat-form-field>
   
     <p class="sign-up">
@@ -15,6 +15,6 @@
       <a class="link" routerLink="/sign-up">Sign Up</a>
     </p>
   
-    <button mat-raised-button color="primary">Login</button>
+    <button mat-raised-button color="primary" (click)="onLogin($event)">Login</button>
   </form>
 </mm-auth-layout>
