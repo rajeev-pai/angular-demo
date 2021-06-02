@@ -10,6 +10,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './auth/login/login.component';
 import { SignUpComponent } from './auth/sign-up/sign-up.component';
+import { AuthLayoutComponent } from './auth/layout/layout.component';
 
 const routes: Route[] = [
   {
@@ -27,6 +28,7 @@ const routes: Route[] = [
     AppComponent,
     LoginComponent,
     SignUpComponent,
+    AuthLayoutComponent,
   ],
   imports: [
     BrowserModule,
