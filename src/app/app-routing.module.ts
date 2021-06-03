@@ -12,6 +12,16 @@ const routes: Route[] = [
   {
     path: 'sign-up',
     component: SignUpComponent
+  },
+  {
+    path: '',
+    redirectTo: 'login',
+    pathMatch: 'full'
+  },
+  {
+    path: '**',
+    redirectTo: 'login',
+    pathMatch: 'full'
   }
 ];
 
