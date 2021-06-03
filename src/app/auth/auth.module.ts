@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
@@ -22,6 +23,7 @@ import { SignUpComponent } from './sign-up/sign-up.component';
     MatButtonModule,
     RouterModule,
     FormsModule,
+    CommonModule,
   ]
 })
 export class AuthModule {

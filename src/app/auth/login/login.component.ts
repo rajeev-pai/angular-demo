@@ -6,11 +6,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
-  username = 'Ethan Hunt';
-  password = '123456';
 
-  onLogin(e: MouseEvent) {
-    e.preventDefault();
-    console.log(this.username, this.password);
+  onLogin(form: any) {
+    console.log(form);
   }
 }

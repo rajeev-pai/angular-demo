@@ -1,20 +1,40 @@
 <mm-auth-layout>
-  <form>
+  <form ngForm #loginForm="ngForm" autocomplete="off" (ngSubmit)="onLogin(loginForm)">
     <mat-form-field class="full-width">
       <mat-label>Username</mat-label>
-      <input [(ngModel)]="username" name="username" type="text" matInput placeholder="Username">
+      <input ngModel name="username" required #userName="ngModel" type="text" matInput placeholder="Username">
     </mat-form-field>
-  
+
+    <div *ngIf="userName.touched">
+      <div *ngIf="userName.hasError('required')">This field is required.</div>
+    </div>
+
     <mat-form-field class="full-width">
       <mat-label>Password</mat-label>
-      <input [(ngModel)]="password" name="password" type="password" matInput placeholder="Password">
+      <input ngModel name="password" required type="password" matInput #password="ngModel" placeholder="Password">
     </mat-form-field>
-  
+
+    <div *ngIf="password.touched">
+      <div *ngIf="password.hasError('required')">This field is required.</div>
+    </div>
+
+    <div ngModelGroup="contact">
+      <mat-form-field class="full-width">
+        <mat-label>Firstname</mat-label>
+        <input ngModel name="firstName" required type="text" matInput #password="ngModel" placeholder="First name">
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <mat-label>Lastname</mat-label>
+        <input ngModel name="lastName" required type="text" matInput #password="ngModel" placeholder="Last name">
+      </mat-form-field>
+    </div>
+
     <p class="sign-up">
       Don't have an account yet?
       <a class="link" routerLink="/sign-up">Sign Up</a>
     </p>
-  
-    <button mat-raised-button color="primary" (click)="onLogin($event)">Login</button>
+
+    <button type="submit" mat-raised-button color="primary">Login</button>
   </form>
 </mm-auth-layout>
