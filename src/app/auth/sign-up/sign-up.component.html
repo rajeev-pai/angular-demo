@@ -1,19 +1,44 @@
 <mm-auth-layout>
-  <form>
+  <form #signUpForm="ngForm" (ngSubmit)="onSignUp(signUpForm)">
     <mat-form-field class="full-width">
       <mat-label>Email</mat-label>
-      <input type="email" matInput placeholder="Email">
+      <input ngModel name="email" #email="ngModel" required type="email"
+        matInput placeholder="Email">
     </mat-form-field>
+
+    <div *ngIf="email.touched">
+      <div *ngIf="email.hasError('required')">This field is required.</div>
+    </div>
 
     <mat-form-field class="full-width">
       <mat-label>Username</mat-label>
-      <input type="text" matInput placeholder="Username">
+      <input ngModel name="username" #username="ngModel" required type="text"
+        matInput placeholder="Username">
     </mat-form-field>
+
+    <div *ngIf="username.touched">
+      <div *ngIf="username.hasError('required')">This field is required.</div>
+    </div>
 
     <mat-form-field class="full-width">
       <mat-label>Password</mat-label>
-      <input type="password" matInput placeholder="Password">
+      <input ngModel name="password" #password="ngModel" required
+        type="password" matInput placeholder="Password">
     </mat-form-field>
+
+    <div *ngIf="password.touched">
+      <div *ngIf="password.hasError('required')">This field is required.</div>
+    </div>
+
+    <mat-form-field class="full-width">
+      <mat-label>Confirm Password</mat-label>
+      <input ngModel name="confirmPassword" #confirmPassword="ngModel" required
+        type="password" matInput placeholder="Password">
+    </mat-form-field>
+
+    <div *ngIf="confirmPassword.touched">
+      <div *ngIf="confirmPassword.hasError('required')">This field is required.</div>
+    </div>
 
     <p class="sign-up">
       Already have an account?

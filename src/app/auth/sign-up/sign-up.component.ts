@@ -6,4 +6,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./sign-up.component.scss']
 })
 export class SignUpComponent {
+
+  onSignUp(form: any) {
+    
+  }
 }
