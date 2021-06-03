@@ -1,8 +1,11 @@
 <mm-auth-layout>
-  <form ngForm #loginForm="ngForm" autocomplete="off" (ngSubmit)="onLogin(loginForm)">
+  <form ngForm #loginForm="ngForm" autocomplete="off"
+    (ngSubmit)="onLogin(loginForm)">
+
     <mat-form-field class="full-width">
       <mat-label>Username</mat-label>
-      <input ngModel name="username" #userName="ngModel" required type="text" matInput placeholder="Username">
+      <input ngModel name="username" #userName="ngModel" required type="text"
+        matInput placeholder="Username">
     </mat-form-field>
 
     <div *ngIf="userName.touched">
@@ -11,7 +14,8 @@
 
     <mat-form-field class="full-width">
       <mat-label>Password</mat-label>
-      <input ngModel name="password" #password="ngModel" required type="password" matInput placeholder="Password">
+      <input ngModel name="password" #password="ngModel" required
+        type="password" matInput placeholder="Password">
     </mat-form-field>
 
     <div *ngIf="password.touched">
