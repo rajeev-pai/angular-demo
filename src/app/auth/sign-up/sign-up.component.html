@@ -47,4 +47,8 @@
 
     <button mat-raised-button color="primary">Create Account</button>
   </form>
+
+  {{ 'Value: ' + valueFromService  }}
+  <button mat-raised-button color="primary" (click)="setValue()">Set Value</button>
+  <button mat-raised-button color="primary" (click)="getValue()">Get Value</button>
 </mm-auth-layout>
