@@ -8,8 +8,7 @@ import { AuthService } from '../auth.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
-  valueFromService = this.authService.getValue();
-
+  
   constructor(private authService: AuthService) { }
 
   onLogin(form: any) {
@@ -18,13 +17,5 @@ export class LoginComponent {
       .subscribe(res => {
         console.log(res);
       });
-  }
-
-  setValue() {
-    this.authService.setValue('LOGIN');
-  }
-
-  getValue() {
-    this.valueFromService = this.authService.getValue();
   }
 }
