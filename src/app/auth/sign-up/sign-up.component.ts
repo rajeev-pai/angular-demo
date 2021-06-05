@@ -8,6 +8,8 @@ import { AuthService } from '../auth.service';
   styleUrls: ['./sign-up.component.scss']
 })
 export class SignUpComponent {
+  showPassword = false;
+  showConfirmPassword = false;
 
   constructor(private authService: AuthService) { }
 

@@ -2,49 +2,80 @@
   <form #signUpForm="ngForm" (ngSubmit)="onSignUp(signUpForm)">
     <mat-form-field class="full-width">
       <mat-label>Email</mat-label>
+
       <input ngModel name="email" #email="ngModel" required type="email"
         matInput placeholder="Email">
-    </mat-form-field>
 
-    <div *ngIf="email.touched">
-      <div *ngIf="email.hasError('required')">This field is required.</div>
-    </div>
+      <mat-error *ngIf="email.touched">
+        <span *ngIf="email.hasError('required')">This field is
+          required.</span>
+      </mat-error>
+    </mat-form-field>
 
     <mat-form-field class="full-width">
       <mat-label>Username</mat-label>
+
       <input ngModel name="username" #username="ngModel" required type="text"
         matInput placeholder="Username">
-    </mat-form-field>
 
-    <div *ngIf="username.touched">
-      <div *ngIf="username.hasError('required')">This field is required.</div>
-    </div>
+      <mat-error *ngIf="username.touched">
+        <span *ngIf="username.hasError('required')">This field is
+          required.</span>
+      </mat-error>
+    </mat-form-field>
 
     <mat-form-field class="full-width">
       <mat-label>Password</mat-label>
-      <input ngModel name="password" #password="ngModel" required
-        type="password" matInput placeholder="Password">
-    </mat-form-field>
 
-    <div *ngIf="password.touched">
-      <div *ngIf="password.hasError('required')">This field is required.</div>
-    </div>
+      <input ngModel name="password" #password="ngModel" required
+        [type]="showPassword ? 'text' : 'password'" matInput
+        placeholder="Password">
+
+      <button type="button" mat-icon-button matSuffix
+        (click)="showPassword = !showPassword"
+        [attr.aria-label]="'Hide password'" [attr.aria-pressed]="showPassword">
+
+        <mat-icon>
+          {{ showPassword ? 'visibility' : 'visibility_off' }}
+        </mat-icon>
+      </button>
+
+      <mat-error *ngIf="password.touched">
+        <span *ngIf="password.hasError('required')">This field is
+          required.</span>
+      </mat-error>
+    </mat-form-field>
 
     <mat-form-field class="full-width">
       <mat-label>Confirm Password</mat-label>
-      <input ngModel name="confirmPassword" #confirmPassword="ngModel" required
-        type="password" matInput placeholder="Password">
-    </mat-form-field>
 
-    <div *ngIf="confirmPassword.touched">
-      <div *ngIf="confirmPassword.hasError('required')">This field is required.</div>
-    </div>
+      <input ngModel name="confirmPassword" #confirmPassword="ngModel" required
+        [type]="showConfirmPassword ? 'text' : 'password'" matInput
+        placeholder="Password">
+
+      <button type="button" mat-icon-button matSuffix
+        (click)="showConfirmPassword = !showConfirmPassword"
+        [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="showConfirmPassword">
+
+        <mat-icon>
+          {{ showConfirmPassword ? 'visibility' : 'visibility_off' }}
+        </mat-icon>
+      </button>
+
+      <mat-error *ngIf="confirmPassword.touched">
+        <span *ngIf="confirmPassword.hasError('required')">This field is
+          required.</span>
+      </mat-error>
+    </mat-form-field>
 
     <p class="sign-up">
       Already have an account?
       <a class="link" routerLink="/login">Login</a>
     </p>
 
-    <button mat-raised-button color="primary">Create Account</button>
+    <button class="mm-button" mat-raised-button color="primary">
+      Create Account
+    </button>
   </form>
 </mm-auth-layout>

@@ -4,29 +4,43 @@
 
     <mat-form-field class="full-width">
       <mat-label>Username</mat-label>
+
       <input ngModel name="username" #userName="ngModel" required type="text"
         matInput placeholder="Username">
-    </mat-form-field>
 
-    <div *ngIf="userName.touched">
-      <div *ngIf="userName.hasError('required')">This field is required.</div>
-    </div>
+      <mat-error *ngIf="userName.touched">
+        <span *ngIf="userName.hasError('required')">This field is
+          required.</span>
+      </mat-error>
+    </mat-form-field>
 
     <mat-form-field class="full-width">
       <mat-label>Password</mat-label>
-      <input ngModel name="password" #password="ngModel" required
-        type="password" matInput placeholder="Password">
-    </mat-form-field>
 
-    <div *ngIf="password.touched">
-      <div *ngIf="password.hasError('required')">This field is required.</div>
-    </div>
+      <input ngModel name="password" #password="ngModel" required
+        [type]="showPassword ? 'text' : 'password'" matInput
+        placeholder="Password">
+
+      <button type="button" mat-icon-button matSuffix
+        (click)="showPassword = !showPassword"
+        [attr.aria-label]="'Hide password'" [attr.aria-pressed]="showPassword">
+        <mat-icon>{{ showPassword ? 'visibility' : 'visibility_off' }}
+        </mat-icon>
+      </button>
+
+      <mat-error *ngIf="password.touched">
+        <span *ngIf="password.hasError('required')">This field is
+          required.</span>
+      </mat-error>
+    </mat-form-field>
 
     <p class="sign-up">
       Don't have an account yet?
       <a class="link" routerLink="/sign-up">Sign Up</a>
     </p>
 
-    <button type="submit" mat-raised-button color="primary">Login</button>
+    <button type="submit" class="mm-button" mat-raised-button color="primary">
+      Login
+    </button>
   </form>
 </mm-auth-layout>

@@ -8,6 +8,7 @@ import { AuthService } from '../auth.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
+  showPassword = false;
   
   constructor(private authService: AuthService) { }
 
