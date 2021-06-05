@@ -9,6 +9,6 @@ export class AuthService {
   constructor(private http: HttpClient) { }
 
   login() {
-    return this.http.get('https://jsonplaceholder.typicode.com/posts');
+    return this.http.get('http://localhost:3000/api/accounts/login');
   }
 }
