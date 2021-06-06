@@ -18,6 +18,10 @@ export class PasswordValidators {
     return (control: AbstractControl): StrongPasswordErrors | null => {
       const value = control.value as string;
 
+      if (!value) {
+        return null;
+      }
+
       if (value.length < minLength) {
         return {
           shouldBeStrong: {
@@ -79,6 +83,10 @@ export class PasswordValidators {
   static shouldMatch(originalPassword: string): ValidatorFn {
     return (control: AbstractControl) => {
       const value = control.value as string;
+
+      if (!value) {
+        return null;
+      }
 
       if (value !== originalPassword) {
         return {

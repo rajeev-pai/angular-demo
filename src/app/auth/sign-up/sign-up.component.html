@@ -1,33 +1,35 @@
 <mm-auth-layout>
-  <form #signUpForm="ngForm" (ngSubmit)="onSignUp(signUpForm)">
+  <form [formGroup]="signUpForm" (ngSubmit)="onSignUp()" autocomplete="off">
+
+    <!-- Email -->
     <mat-form-field class="full-width">
       <mat-label>Email</mat-label>
 
-      <input ngModel name="email" #email="ngModel" required type="email"
-        matInput placeholder="Email">
+      <input formControlName="email" required type="email" matInput
+        placeholder="Email">
 
-      <mat-error *ngIf="email.touched">
-        <span *ngIf="email.hasError('required')">This field is
-          required.</span>
+      <mat-error *ngIf="email.touched && email.invalid">
+        <span>{{ getEmailError() }}</span>
       </mat-error>
     </mat-form-field>
 
+    <!-- Username -->
     <mat-form-field class="full-width">
       <mat-label>Username</mat-label>
 
-      <input ngModel name="username" #username="ngModel" required type="text"
-        matInput placeholder="Username">
+      <input formControlName="username" required type="text" matInput
+        placeholder="Username">
 
-      <mat-error *ngIf="username.touched">
-        <span *ngIf="username.hasError('required')">This field is
-          required.</span>
+      <mat-error *ngIf="username.touched && username.invalid">
+        <span>{{ getUsernameError() }}</span>
       </mat-error>
     </mat-form-field>
 
+    <!-- Password -->
     <mat-form-field class="full-width">
       <mat-label>Password</mat-label>
 
-      <input ngModel name="password" #password="ngModel" required
+      <input formControlName="password" required
         [type]="showPassword ? 'text' : 'password'" matInput
         placeholder="Password">
 
@@ -40,16 +42,16 @@
         </mat-icon>
       </button>
 
-      <mat-error *ngIf="password.touched">
-        <span *ngIf="password.hasError('required')">This field is
-          required.</span>
+      <mat-error *ngIf="password.touched && password.invalid">
+        <span>{{ getPasswordError() }}</span>
       </mat-error>
     </mat-form-field>
 
+    <!-- Confirm password -->
     <mat-form-field class="full-width">
       <mat-label>Confirm Password</mat-label>
 
-      <input ngModel name="confirmPassword" #confirmPassword="ngModel" required
+      <input formControlName="confirmPassword" required
         [type]="showConfirmPassword ? 'text' : 'password'" matInput
         placeholder="Password">
 
@@ -63,9 +65,8 @@
         </mat-icon>
       </button>
 
-      <mat-error *ngIf="confirmPassword.touched">
-        <span *ngIf="confirmPassword.hasError('required')">This field is
-          required.</span>
+      <mat-error *ngIf="confirmPassword.touched && confirmPassword.invalid">
+        <span>{{ getConfirmPasswordError() }}</span>
       </mat-error>
     </mat-form-field>
 
@@ -74,7 +75,9 @@
       <a class="link" routerLink="/login">Login</a>
     </p>
 
-    <button class="mm-button" mat-raised-button color="primary">
+    <!-- Submit button -->
+    <button type="submit" class="mm-button" mat-raised-button color="primary"
+      [disabled]="signUpForm.invalid">
       Create Account
     </button>
   </form>

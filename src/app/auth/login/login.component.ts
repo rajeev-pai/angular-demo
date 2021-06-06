@@ -13,10 +13,10 @@ export class LoginComponent {
   constructor(private authService: AuthService) { }
 
   onLogin(form: any) {
-    this.authService
-      .login()
-      .subscribe(res => {
-        console.log(res);
-      });
+    // this.authService
+    //   .login()
+    //   .subscribe(res => {
+    //     console.log(res);
+    //   });
   }
 }
