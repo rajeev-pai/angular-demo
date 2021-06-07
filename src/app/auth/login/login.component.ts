@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 
 import { AuthService } from '../auth.service';
 
@@ -8,14 +10,24 @@ import { AuthService } from '../auth.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
-  
-  constructor(private authService: AuthService) { }
+  loginError = false;
 
-  onLogin(form: any) {
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+  ) { }
+
+  onLogin(form: NgForm) {
     this.authService
-      .login()
-      .subscribe(res => {
-        console.log(res);
-      });
+      .login(form.value)
+      .subscribe(
+        res => {
+          this.router.navigateByUrl('/app');
+        },
+        err => {
+          this.loginError = true;
+          console.log('Login failed: ', err);
+        }
+      );
   }
 }

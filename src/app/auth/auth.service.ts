@@ -1,6 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
+interface LoginFormData {
+  username: string;
+  password: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -8,7 +13,7 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
-  login() {
-    return this.http.get('http://localhost:3000/api/accounts/login');
+  login(data: LoginFormData) {
+    return this.http.post('/api/accounts/login', data);
   }
 }

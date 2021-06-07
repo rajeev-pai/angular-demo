@@ -22,6 +22,10 @@
       <div *ngIf="password.hasError('required')">This field is required.</div>
     </div>
 
+    <div class="error" *ngIf="loginError">
+      <p>Invalid login credentials!</p>
+    </div>
+
     <p class="sign-up">
       Don't have an account yet?
       <a class="link" routerLink="/sign-up">Sign Up</a>
