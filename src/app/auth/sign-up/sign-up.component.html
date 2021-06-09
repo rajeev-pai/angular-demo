@@ -1,43 +1,42 @@
 <mm-auth-layout>
-  <form #signUpForm="ngForm" (ngSubmit)="onSignUp(signUpForm)">
+  <form [formGroup]="signUpForm" (ngSubmit)="onSignUp()" autocomplete="off">
     <mat-form-field class="full-width">
       <mat-label>Email</mat-label>
-      <input ngModel name="email" #email="ngModel" required type="email"
-        matInput placeholder="Email">
+      <input formControlName="email" type="email" matInput placeholder="Email">
     </mat-form-field>
 
     <div *ngIf="email.touched">
-      <div *ngIf="email.hasError('required')">This field is required.</div>
+      <div>{{ getEmailError() }}</div>
     </div>
 
     <mat-form-field class="full-width">
       <mat-label>Username</mat-label>
-      <input ngModel name="username" #username="ngModel" required type="text"
-        matInput placeholder="Username">
+      <input formControlName="username" type="text" matInput
+        placeholder="Username">
     </mat-form-field>
 
     <div *ngIf="username.touched">
-      <div *ngIf="username.hasError('required')">This field is required.</div>
+      <div>{{ getUsernameError() }}</div>
     </div>
 
     <mat-form-field class="full-width">
       <mat-label>Password</mat-label>
-      <input ngModel name="password" #password="ngModel" required
-        type="password" matInput placeholder="Password">
+      <input formControlName="password" type="password" matInput
+        placeholder="Password">
     </mat-form-field>
 
     <div *ngIf="password.touched">
-      <div *ngIf="password.hasError('required')">This field is required.</div>
+      <div>{{ getPasswordError() }}</div>
     </div>
 
     <mat-form-field class="full-width">
       <mat-label>Confirm Password</mat-label>
-      <input ngModel name="confirmPassword" #confirmPassword="ngModel" required
-        type="password" matInput placeholder="Password">
+      <input formControlName="confirmPassword" type="password" matInput
+        placeholder="Password">
     </mat-form-field>
 
     <div *ngIf="confirmPassword.touched">
-      <div *ngIf="confirmPassword.hasError('required')">This field is required.</div>
+      <div>{{ getConfirmPasswordError() }}</div>
     </div>
 
     <p class="sign-up">

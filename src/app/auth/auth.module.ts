@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -24,6 +24,7 @@ import { SignUpComponent } from './sign-up/sign-up.component';
     MatButtonModule,
     RouterModule,
     FormsModule,
+    ReactiveFormsModule,
     CommonModule,
     HttpClientModule,
   ],
