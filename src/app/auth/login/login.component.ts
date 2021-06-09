@@ -22,7 +22,7 @@ export class LoginComponent {
     this.authService
       .login(form.value)
       .subscribe(
-        res => {
+        _ => {
           this.router.navigateByUrl('/app');
         },
         err => {
