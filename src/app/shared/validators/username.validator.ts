@@ -7,7 +7,7 @@ export class UsernameValidators {
 
     if (value && (value.indexOf(' ') !== -1)) {
       return {
-        shouldNotContainSpaces: true,
+        cannotContainSpace: true,
       };
     }
 

@@ -16,7 +16,7 @@ export class LoginComponent {
   constructor(
     private authService: AuthService,
     private router: Router,
-  ) { }
+  ) {  }
 
   onLogin(form: NgForm) {
     this.authService

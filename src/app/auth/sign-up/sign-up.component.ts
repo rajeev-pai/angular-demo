@@ -53,7 +53,7 @@ export class SignUpComponent implements OnInit, OnDestroy {
     confirmPassword: new FormControl('', [Validators.required]),
   });
 
-  private passwordSubcription!: Subscription;
+  private passwordSubscription!: Subscription;
 
   constructor(
     private authService: AuthService,
@@ -62,7 +62,7 @@ export class SignUpComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     // Listen to changes from the password input field.
-    this.passwordSubcription = this.password
+    this.passwordSubscription = this.password
       .valueChanges
       .subscribe(value => {
         this.confirmPassword.clearValidators();
@@ -75,7 +75,7 @@ export class SignUpComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.passwordSubcription.unsubscribe();
+    this.passwordSubscription.unsubscribe();
   }
 
   get email() {
