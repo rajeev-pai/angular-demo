@@ -1,20 +1,32 @@
-import { Component } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  OnDestroy,
+} from '@angular/core';
 import {
   FormGroup,
   FormControl,
   Validators,
 } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 import { AuthService } from '../auth.service';
-import { UsernameValidators } from '../../shared/validators/username.validator';
-import { PasswordValidators } from '../../shared/validators/password.validator';
+import {
+  UsernameValidators,
+  PasswordValidators,
+  StrongPasswordErrors,
+} from '../../utils/validators';
 
 @Component({
   selector: 'mm-sign-up',
   templateUrl: './sign-up.component.html',
   styleUrls: ['./sign-up.component.scss']
 })
-export class SignUpComponent {
+export class SignUpComponent implements OnInit, OnDestroy {
+  showPassword = false;
+  showConfirmPassword = false;
+  signUpInProgress = false;
 
   signUpForm = new FormGroup({
     email: new FormControl(
@@ -28,35 +40,58 @@ export class SignUpComponent {
       '',
       [
         Validators.required,
-        UsernameValidators.shouldNotContainSpaces,
-      ],
+        UsernameValidators.cannotContainSpace,
+      ]
     ),
     password: new FormControl(
       '',
       [
         Validators.required,
-        PasswordValidators.shouldBeStrong(6),
-      ],
+        PasswordValidators.shouldBeStrong(6, 10),
+      ]
     ),
-    confirmPassword: new FormControl('', Validators.required),
+    confirmPassword: new FormControl('', [Validators.required]),
   });
 
-  constructor(private authService: AuthService) { }
+  private passwordSubcription!: Subscription;
+
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+  ) { }
+
+  ngOnInit() {
+    // Listen to changes from the password input field.
+    this.passwordSubcription = this.password
+      .valueChanges
+      .subscribe(value => {
+        this.confirmPassword.clearValidators();
+        this.confirmPassword.setValidators([
+          Validators.required,
+          PasswordValidators.shouldMatch(value),
+        ]);
+        this.confirmPassword.updateValueAndValidity();
+      });
+  }
+
+  ngOnDestroy() {
+    this.passwordSubcription.unsubscribe();
+  }
 
   get email() {
-    return this.signUpForm.controls['email'] as FormControl;
+    return this.signUpForm.get('email') as FormControl;
   }
 
   get username() {
-    return this.signUpForm.controls['username'] as FormControl;
+    return this.signUpForm.get('username') as FormControl;
   }
 
   get password() {
-    return this.signUpForm.controls['password'] as FormControl;
+    return this.signUpForm.get('password') as FormControl;
   }
 
   get confirmPassword() {
-    return this.signUpForm.controls['confirmPassword'] as FormControl;
+    return this.signUpForm.get('confirmPassword') as FormControl;
   }
 
   getEmailError() {
@@ -76,7 +111,7 @@ export class SignUpComponent {
       return 'This field is required!';
     }
 
-    if (this.username.hasError('shouldNotContainSpaces')) {
+    if (this.username.hasError('cannotContainSpace')) {
       return 'Should not contain spaces!';
     }
 
@@ -89,15 +124,30 @@ export class SignUpComponent {
     }
 
     if (this.password.hasError('shouldBeStrong')) {
-      const errors = this.password.errors?.shouldBeStrong;
-      const requiredLength = errors.requiredLength;
+      const errors = (this.password.errors! as StrongPasswordErrors).shouldBeStrong;
 
-      if (requiredLength) {
-        return `Require minimum ${requiredLength} characters`;
+      if (errors.requiredLength) {
+        return `Must have at least ${errors.requiredLength} characters.`;
       }
 
-      if (errors.uppercaseCharacter) {
-        return 'Should contain at least one uppercase character';
+      if (errors.maxLength) {
+        return `Must not contain more that ${errors.maxLength} characters.`;
+      }
+
+      if (errors.requireSpecialCharacter) {
+        return 'Must contain at least one special character.';
+      }
+
+      if (errors.requireLowerCaseCharacter) {
+        return 'Must contain at least one lowercase character.';
+      }
+
+      if (errors.requireUpperCaseCharacter) {
+        return 'Must contain at least one uppercase character';
+      }
+
+      if (errors.requireNumericalCharacter) {
+        return 'Must contain at least one number.';
       }
     }
 
@@ -109,10 +159,37 @@ export class SignUpComponent {
       return 'This field is required!';
     }
 
+    if (this.confirmPassword.hasError('shouldMatch')) {
+      return 'Does not match the original password.';
+    }
+
     return null;
   }
 
   onSignUp() {
+    if (this.signUpForm.valid) {
+      this.signUpInProgress = true;
 
+      this.authService
+        .signUp(this.signUpForm.value)
+        .subscribe(
+          _ => {
+            this.signUpInProgress = false;
+            this.resetSignUpForm();
+            this.router.navigateByUrl('/login');
+          },
+          err => {
+            console.log('Err:', err);
+          }
+        );
+    }
+  }
+
+  private resetSignUpForm() {
+    this.signUpForm.reset();
+
+    for (let control in this.signUpForm.controls) {
+      this.signUpForm.controls[control].setErrors(null);
+    }
   }
 }

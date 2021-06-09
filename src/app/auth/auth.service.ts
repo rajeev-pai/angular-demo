@@ -1,5 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {
+  HttpClient,
+} from '@angular/common/http';
+
+import { LoginFormData, SignUpFormData } from './auth.types';
 
 interface LoginFormData {
   username: string;
@@ -15,5 +19,9 @@ export class AuthService {
 
   login(data: LoginFormData) {
     return this.http.post('/api/accounts/login', data);
+  }
+
+  signUp(data: SignUpFormData) {
+    return this.http.post('/api/accounts/create', data);
   }
 }

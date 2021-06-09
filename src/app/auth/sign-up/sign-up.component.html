@@ -1,49 +1,84 @@
 <mm-auth-layout>
   <form [formGroup]="signUpForm" (ngSubmit)="onSignUp()" autocomplete="off">
+
+    <!-- Email -->
     <mat-form-field class="full-width">
       <mat-label>Email</mat-label>
-      <input formControlName="email" type="email" matInput placeholder="Email">
+
+      <input formControlName="email" required type="email" matInput
+        placeholder="Email">
+
+      <mat-error *ngIf="email.touched && email.invalid">
+        <span>{{ getEmailError() }}</span>
+      </mat-error>
     </mat-form-field>
 
-    <div *ngIf="email.touched">
-      <div>{{ getEmailError() }}</div>
-    </div>
-
+    <!-- Username -->
     <mat-form-field class="full-width">
       <mat-label>Username</mat-label>
-      <input formControlName="username" type="text" matInput
+
+      <input formControlName="username" required type="text" matInput
         placeholder="Username">
+
+      <mat-error *ngIf="username.touched && username.invalid">
+        <span>{{ getUsernameError() }}</span>
+      </mat-error>
     </mat-form-field>
 
-    <div *ngIf="username.touched">
-      <div>{{ getUsernameError() }}</div>
-    </div>
-
+    <!-- Password -->
     <mat-form-field class="full-width">
       <mat-label>Password</mat-label>
-      <input formControlName="password" type="password" matInput
+
+      <input formControlName="password" required
+        [type]="showPassword ? 'text' : 'password'" matInput
         placeholder="Password">
+
+      <button type="button" mat-icon-button matSuffix
+        (click)="showPassword = !showPassword"
+        [attr.aria-label]="'Hide password'" [attr.aria-pressed]="showPassword">
+
+        <mat-icon>
+          {{ showPassword ? 'visibility' : 'visibility_off' }}
+        </mat-icon>
+      </button>
+
+      <mat-error *ngIf="password.touched && password.invalid">
+        <span>{{ getPasswordError() }}</span>
+      </mat-error>
     </mat-form-field>
 
-    <div *ngIf="password.touched">
-      <div>{{ getPasswordError() }}</div>
-    </div>
-
+    <!-- Confirm password -->
     <mat-form-field class="full-width">
       <mat-label>Confirm Password</mat-label>
-      <input formControlName="confirmPassword" type="password" matInput
-        placeholder="Password">
-    </mat-form-field>
 
-    <div *ngIf="confirmPassword.touched">
-      <div>{{ getConfirmPasswordError() }}</div>
-    </div>
+      <input formControlName="confirmPassword" required
+        [type]="showConfirmPassword ? 'text' : 'password'" matInput
+        placeholder="Password">
+
+      <button type="button" mat-icon-button matSuffix
+        (click)="showConfirmPassword = !showConfirmPassword"
+        [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="showConfirmPassword">
+
+        <mat-icon>
+          {{ showConfirmPassword ? 'visibility' : 'visibility_off' }}
+        </mat-icon>
+      </button>
+
+      <mat-error *ngIf="confirmPassword.touched && confirmPassword.invalid">
+        <span>{{ getConfirmPasswordError() }}</span>
+      </mat-error>
+    </mat-form-field>
 
     <p class="sign-up">
       Already have an account?
       <a class="link" routerLink="/login">Login</a>
     </p>
 
-    <button mat-raised-button color="primary">Create Account</button>
+    <!-- Submit button -->
+    <button type="submit" class="mm-button" mat-raised-button color="primary"
+      [disabled]="signUpForm.invalid">
+      Create Account
+    </button>
   </form>
 </mm-auth-layout>
