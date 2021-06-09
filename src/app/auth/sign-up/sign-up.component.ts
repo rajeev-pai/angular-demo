@@ -13,10 +13,10 @@ import { Subscription } from 'rxjs';
 
 import { AuthService } from '../auth.service';
 import {
-  UsernameValidators,
   PasswordValidators,
   StrongPasswordErrors,
-} from '../../utils/validators';
+} from '../../shared/validators/password.validator';
+import { UsernameValidators } from '../../shared/validators/username.validator';
 
 @Component({
   selector: 'mm-sign-up',
