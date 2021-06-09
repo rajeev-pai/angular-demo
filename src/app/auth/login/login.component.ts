@@ -11,6 +11,7 @@ import { AuthService } from '../auth.service';
 })
 export class LoginComponent {
   loginError = false;
+  showPassword = false;
 
   constructor(
     private authService: AuthService,
