@@ -5,11 +5,6 @@ import {
 
 import { LoginFormData, SignUpFormData } from './auth.types';
 
-interface LoginFormData {
-  username: string;
-  password: string;
-}
-
 @Injectable({
   providedIn: 'root'
 })
