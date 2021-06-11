@@ -21,4 +21,8 @@ export class ContactsComponent implements OnInit {
         this.contacts = res.contacts;
       });
   }
+
+  favouriteChanged(e: boolean) {
+    console.log('New favourite value: ', e);
+  }
 }

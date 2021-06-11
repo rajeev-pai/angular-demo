@@ -1,1 +1,20 @@
-<p>contact works!</p>
+<div class="contact">
+  <div class="info">
+    <div class="name">{{ contact.firstName + ' ' + contact.lastName }}</div>
+    <div class="updated_on">{{ contact.createdAt | date:'fullDate' }}</div>
+  </div>
+
+  <div class="email">{{ contact.email }}</div>
+
+  <div class="summary">
+    <div class="you_owe">
+      You owe: <span class="amount">{{ contact.youOwe | currency:'INR' }}</span>
+    </div>
+
+    <div class="owes_you">
+      Owes you: <span class="amount">{{ contact.owesYou | currency:'INR' }}</span>
+    </div>
+  </div>
+
+  <button type="button" (click)="onFavorite()">Favourite</button>
+</div>

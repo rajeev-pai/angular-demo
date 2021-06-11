@@ -1,0 +1,42 @@
+.contact {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #673ab7;
+
+  .info {
+    .name {
+      font-size: 18px;
+      font-weight: 500;
+    }
+
+    .updated_on {
+      color: #aaa;
+      font-size: 12px;
+    }
+  }
+
+  .email {
+    border: 2px solid #4ca1a3;
+    border-radius: 24px;
+    padding: 8px 16px;
+  }
+
+  .summary {
+    font-weight: 500;
+
+    .you_owe {
+      .amount {
+        color: #c84b31;
+      }
+    }
+
+    .owes_you {
+      .amount {
+        color: #125d98;
+      }
+    }
+  }
+}
