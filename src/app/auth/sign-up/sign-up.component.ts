@@ -167,7 +167,7 @@ export class SignUpComponent implements OnInit, OnDestroy {
   }
 
   onSignUp() {
-    if (this.signUpForm.valid) {
+    if (this.signUpForm.valid && !this.signUpInProgress) {
       this.signUpInProgress = true;
 
       this.authService
