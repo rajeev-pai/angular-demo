@@ -43,4 +43,8 @@ export class AuthService {
   signUp(data: SignUpFormData) {
     return this.http.post(SIGNUP, data);
   }
+
+  getAuthToken() {
+    return this.cookieService.get(AUTH_KEY);
+  }
 }

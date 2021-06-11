@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
@@ -28,6 +29,7 @@ import { CoreRoutingModule } from './core-routing.module';
     MatIconModule,
     MatTableModule,
     CoreRoutingModule,
+    CommonModule,
   ]
 })
 export class CoreModule { }
