@@ -15,8 +15,8 @@ import { AuthService } from '../auth.service';
 import {
   PasswordValidators,
   StrongPasswordErrors,
-} from '../../shared/validators/password.validator';
-import { UsernameValidators } from '../../shared/validators/username.validator';
+  UsernameValidators,
+} from '../../shared/validators';
 
 @Component({
   selector: 'mm-sign-up',

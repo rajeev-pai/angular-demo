@@ -12,6 +12,7 @@ import {
   SignUpFormData,
   LoginResponse,
 } from './auth.types';
+import { LOGIN, SIGNUP } from '../utils/apis';
 
 const AUTH_KEY = 'auth';
 
@@ -27,7 +28,7 @@ export class AuthService {
 
   login(data: LoginFormData) {
     return (this.http
-      .post('/api/accounts/login', data) as Observable<LoginResponse>)
+      .post(LOGIN, data) as Observable<LoginResponse>)
       .pipe(
         tap(res => {
           const expiryTime = Date.now() + (24 * 60 * 60 * 1000);
@@ -40,6 +41,6 @@ export class AuthService {
   }
 
   signUp(data: SignUpFormData) {
-    return this.http.post('/api/accounts/create', data);
+    return this.http.post(SIGNUP, data);
   }
 }
