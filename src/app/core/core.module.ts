@@ -11,6 +11,7 @@ import { ContactFormComponent } from './pages/contacts/contact-form/contact-form
 import { TransactionsComponent } from './pages/transactions/transactions.component';
 import { TransactionComponent } from './pages/transactions/transaction/transaction.component';
 import { TransactionFormComponent } from './pages/transactions/transaction-form/transaction-form.component';
+import { CoreRoutingModule } from './core-routing.module';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { TransactionFormComponent } from './pages/transactions/transaction-form/
     MatToolbarModule,
     MatIconModule,
     MatTableModule,
+    CoreRoutingModule,
   ]
 })
 export class CoreModule { }
