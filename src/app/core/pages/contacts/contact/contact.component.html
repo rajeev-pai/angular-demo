@@ -1,4 +1,8 @@
 <div class="contact">
+  <div class="image">
+    <img src="assets/images/contact.png" alt="Contact Profile Image">
+  </div>
+
   <div class="info">
     <div class="name">{{ contact.firstName + ' ' + contact.lastName }}</div>
     <div class="updated_on">{{ contact.createdAt | date:'fullDate' }}</div>
@@ -16,5 +20,7 @@
     </div>
   </div>
 
-  <button type="button" (click)="onFavorite()">Favourite</button>
+  <div class="buttons">
+    <mm-crud-buttons></mm-crud-buttons>
+  </div>
 </div>

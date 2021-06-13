@@ -5,13 +5,23 @@
 
   .header {
     margin: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    h1 {
+      margin: 0;
+    }
+
+    button {
+      padding-top: 8px;
+      padding-bottom: 8px;
+    }
   }
 
   .contacts {
-    width: 65%;
     flex-grow: 1;
     background-color: white;
-    margin: 0 auto;
   }
 }
 

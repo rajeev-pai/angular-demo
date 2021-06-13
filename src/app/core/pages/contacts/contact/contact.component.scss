@@ -1,12 +1,26 @@
 .contact {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  margin: 16px;
-  padding-bottom: 16px;
-  border-bottom: 1px solid #673ab7;
+  // justify-content: space-between;
+  // margin: 16px;
+  padding: 8px 0;
+  border-top: 1px solid #673ab7;
+
+  .image {
+    margin-right: 16px;
+
+    img {
+      border-radius: 50%;
+      height: 100px;
+      width: 100px;
+    }
+  }
 
   .info {
+    flex-grow: 1.5;
+    margin-right: 16px;
+    min-width: 250px;
+
     .name {
       font-size: 18px;
       font-weight: 500;
@@ -19,13 +33,19 @@
   }
 
   .email {
+    flex-grow: 1;
+    min-width: 200px;
+    margin-right: 16px;
     border: 2px solid #4ca1a3;
     border-radius: 24px;
     padding: 8px 16px;
+    text-align: center;
   }
 
   .summary {
+    flex-grow: 1;
     font-weight: 500;
+    text-align: center;
 
     .you_owe {
       .amount {
@@ -38,5 +58,9 @@
         color: #125d98;
       }
     }
+  }
+
+  .buttons {
+    
   }
 }

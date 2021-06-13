@@ -3,6 +3,8 @@ import { RouterModule, Route } from '@angular/router';
 
 import { NavbarComponent } from './navbar/navbar.component';
 import { ContactsComponent } from './pages/contacts/contacts.component';
+import { ContactFormComponent } from './pages/contacts/contact-form/contact-form.component';
+import { ContactComponent } from './pages/contacts/contact/contact.component';
 import { TransactionsComponent } from './pages/transactions/transactions.component';
 
 const routes: Route[] = [
@@ -15,9 +17,26 @@ const routes: Route[] = [
         component: ContactsComponent
       },
       {
+        path: 'contact/:id',
+        component: ContactComponent,
+      },
+      {
+        path: 'new-contact',
+        component: ContactFormComponent,
+      },
+      {
+        path: 'edit-contact/:id',
+        component: ContactFormComponent,
+      },
+      {
         path: 'transactions',
         component: TransactionsComponent,
       },
+      {
+        path: '',
+        redirectTo: 'contacts',
+        pathMatch: 'full'
+      }
     ],
   },
 ];
