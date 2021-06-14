@@ -1,9 +1,9 @@
 <div class="buttons">
-  <mm-icon-button iconName="add"></mm-icon-button>
+  <mm-icon-button iconName="add" (press)="onEmit('add')"></mm-icon-button>
 
-  <mm-icon-button iconName="visibility" (press)="onView()"></mm-icon-button>
+  <mm-icon-button iconName="visibility" (press)="onEmit('view')"></mm-icon-button>
 
-  <mm-icon-button iconName="edit"></mm-icon-button>
+  <mm-icon-button iconName="edit" (press)="onEmit('edit')"></mm-icon-button>
   
-  <mm-icon-button iconName="delete"></mm-icon-button>
+  <mm-icon-button iconName="delete" (press)="onEmit('delete')"></mm-icon-button>
 </div>

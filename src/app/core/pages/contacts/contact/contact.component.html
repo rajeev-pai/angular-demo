@@ -1,10 +1,10 @@
-<div class="contact">
+<div class="contact" (click)="onViewContact()">
   <div class="image">
     <img src="assets/images/contact.png" alt="Contact Profile Image">
   </div>
 
   <div class="info">
-    <div class="name" (click)="onViewContact(contact.id)">{{ contact.firstName +
+    <div class="name">{{ contact.firstName +
       ' ' + contact.lastName }}</div>
     <div class="updated_on">{{ contact.createdAt | date:'fullDate' }}</div>
   </div>
@@ -23,6 +23,6 @@
   </div>
 
   <div class="buttons">
-    <mm-crud-buttons (view)="onViewContact(contact.id)"></mm-crud-buttons>
+    <mm-crud-buttons (press)="onCaptureEvent($event)"></mm-crud-buttons>
   </div>
 </div>

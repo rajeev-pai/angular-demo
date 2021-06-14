@@ -1,5 +1,7 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 
+import { CrudPressEvents } from './crud-buttons.type';
+
 @Component({
   selector: 'mm-crud-buttons',
   templateUrl: './crud-buttons.component.html',
@@ -7,9 +9,9 @@ import { Component, Output, EventEmitter } from '@angular/core';
 })
 export class CrudButtonsComponent {
 
-  @Output('view') view = new EventEmitter();
+  @Output('press') press = new EventEmitter<CrudPressEvents>();
 
-  onView() {
-    this.view.emit();
+  onEmit(eventType: CrudPressEvents) {
+    this.press.emit(eventType);
   }
 }

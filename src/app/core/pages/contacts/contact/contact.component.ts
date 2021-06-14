@@ -7,6 +7,7 @@ import {
 import { Router } from '@angular/router';
 
 import { ContactData } from '../contacts.service';
+import { CrudPressEvents } from '../../../../shared/UI/crud-buttons/crud-buttons.type';
 
 @Component({
   selector: 'mm-contact',
@@ -23,7 +24,28 @@ export class ContactComponent {
     private router: Router,
   ) { }
 
-  onViewContact(id: number) {
-    this.router.navigate(['/app/contact', id]);
+  onCaptureEvent(e: CrudPressEvents) {
+    switch (e) {
+      case 'add':
+
+        break;
+
+      case 'view':
+        this.onViewContact();
+        break;
+
+      case 'edit':
+        this.onEditContact();
+        break;
+    }
+  }
+
+  onViewContact() {
+    this.router.navigate(['/app/contact', this.contact.id]);
+  }
+
+  onEditContact() {
+    // this.router.navigate(['/app/edit-contact', this.contact.id]);
+    console.log('Open modal');
   }
 }
