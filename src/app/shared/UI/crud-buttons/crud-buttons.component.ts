@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'mm-crud-buttons',
@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class CrudButtonsComponent {
 
+  @Output('view') view = new EventEmitter();
+
+  onView() {
+    this.view.emit();
+  }
 }

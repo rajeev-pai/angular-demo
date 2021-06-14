@@ -15,6 +15,7 @@ import { TransactionComponent } from './pages/transactions/transaction/transacti
 import { TransactionFormComponent } from './pages/transactions/transaction-form/transaction-form.component';
 import { CoreRoutingModule } from './core-routing.module';
 import { SharedModule } from '../shared/shared.module';
+import { ContactViewComponent } from './pages/contacts/contact-view/contact-view.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { SharedModule } from '../shared/shared.module';
     TransactionsComponent,
     TransactionComponent,
     TransactionFormComponent,
+    ContactViewComponent,
   ],
   imports: [
     MatToolbarModule,

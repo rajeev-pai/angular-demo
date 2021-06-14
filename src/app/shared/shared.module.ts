@@ -17,7 +17,7 @@ import { IconButtonComponent } from './UI/icon-button/icon-button.component';
   ],
   exports: [
     CrudButtonsComponent,
-    IconButtonComponent
+    IconButtonComponent,
   ],
 })
 export class SharedModule { }

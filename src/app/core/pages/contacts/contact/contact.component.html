@@ -4,7 +4,8 @@
   </div>
 
   <div class="info">
-    <div class="name">{{ contact.firstName + ' ' + contact.lastName }}</div>
+    <div class="name" (click)="onViewContact(contact.id)">{{ contact.firstName +
+      ' ' + contact.lastName }}</div>
     <div class="updated_on">{{ contact.createdAt | date:'fullDate' }}</div>
   </div>
 
@@ -16,11 +17,12 @@
     </div>
 
     <div class="owes_you">
-      Owes you: <span class="amount">{{ contact.owesYou | currency:'INR' }}</span>
+      Owes you: <span class="amount">{{ contact.owesYou | currency:'INR'
+        }}</span>
     </div>
   </div>
 
   <div class="buttons">
-    <mm-crud-buttons></mm-crud-buttons>
+    <mm-crud-buttons (view)="onViewContact(contact.id)"></mm-crud-buttons>
   </div>
 </div>

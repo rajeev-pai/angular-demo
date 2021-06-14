@@ -4,6 +4,7 @@ import {
   Output,
   EventEmitter,
 } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { ContactData } from '../contacts.service';
 
@@ -18,7 +19,11 @@ export class ContactComponent {
 
   @Output('favorite') favorite = new EventEmitter<boolean>();
 
-  onFavorite() {
-    this.favorite.emit(true);
+  constructor(
+    private router: Router,
+  ) { }
+
+  onViewContact(id: number) {
+    this.router.navigate(['/app/contact', id]);
   }
 }

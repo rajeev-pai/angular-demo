@@ -1,4 +1,9 @@
-import { Component, Input } from '@angular/core';
+import { 
+  Component, 
+  Input,
+  Output,
+  EventEmitter,
+} from '@angular/core';
 
 @Component({
   selector: 'mm-icon-button',
@@ -8,4 +13,10 @@ import { Component, Input } from '@angular/core';
 export class IconButtonComponent {
 
   @Input('iconName') icon!: string;
+
+  @Output('press') press = new EventEmitter();
+
+  onClickButton() {
+    this.press.emit();
+  }
 }
