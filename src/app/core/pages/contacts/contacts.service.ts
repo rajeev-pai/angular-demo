@@ -33,6 +33,6 @@ export class ContactsService {
       'Authorization': `Bearer ${this.authService.getAuthToken()}`
     });
 
-    return this.http.get<ContactData>(`/api/contact/${id}`, { headers });
+    return this.http.get<ContactData>(`/api/contacts/${id}`, { headers });
   }
 }

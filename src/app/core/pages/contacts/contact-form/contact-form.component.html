@@ -1,48 +1,49 @@
 <div class="container">
-  <h1>New Contact</h1>
+  <h1>{{ title }}</h1>
 
   <form #contactForm="ngForm" (ngSubmit)="onSubmitForm()" autocomplete="off">
     <mat-form-field class="full-width">
       <mat-label>First Name</mat-label>
-  
+
       <input ngModel name="firstName" #firstName="ngModel" required type="text"
         matInput placeholder="First Name">
-  
+
       <mat-error *ngIf="firstName.touched">
         <span *ngIf="firstName.hasError('required')">This field is
           required.</span>
       </mat-error>
     </mat-form-field>
-  
+
     <mat-form-field class="full-width">
       <mat-label>Last Name</mat-label>
-  
+
       <input ngModel name="lastName" #lastName="ngModel" required type="text"
         matInput placeholder="Last Name">
-  
+
       <mat-error *ngIf="lastName.touched">
         <span *ngIf="lastName.hasError('required')">This field is
           required.</span>
       </mat-error>
     </mat-form-field>
-  
+
     <mat-form-field class="full-width">
       <mat-label>Email</mat-label>
-  
-      <input ngModel name="email" #email="ngModel" required type="email" matInput
-        placeholder="Email">
-  
+
+      <input ngModel name="email" #email="ngModel" required type="email"
+        matInput placeholder="Email">
+
       <mat-error *ngIf="email.touched">
         <span *ngIf="email.hasError('required')">This field is
           required.</span>
         <span *ngIf="email.hasError('email')">Invalid email.</span>
       </mat-error>
     </mat-form-field>
-  
+
     <div class="buttons">
       <button type="button" mat-button>Cancel</button>
-  
-      <button type="submit" mat-raised-button color="accent">Create</button>
+
+      <button type="submit" mat-raised-button color="accent">{{ buttonTitle
+        }}</button>
     </div>
   </form>
 </div>

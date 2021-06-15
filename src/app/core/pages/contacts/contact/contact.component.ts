@@ -44,7 +44,6 @@ export class ContactComponent {
   }
 
   onEditContact() {
-    // this.router.navigate(['/app/edit-contact', this.contact.id]);
-    console.log('Open modal');
+    this.router.navigate(['/app/edit-contact', this.contact.id]);
   }
 }
