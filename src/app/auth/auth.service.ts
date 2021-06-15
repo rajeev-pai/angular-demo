@@ -11,8 +11,8 @@ import {
   LoginFormData,
   SignUpFormData,
   LoginResponse,
-} from './auth.types';
-import { LOGIN, SIGNUP } from '../utils/apis';
+} from '../helpers/types';
+import { LOGIN, SIGNUP } from '../helpers/apis';
 
 const AUTH_KEY = 'auth';
 

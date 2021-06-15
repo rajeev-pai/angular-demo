@@ -16,7 +16,7 @@ import {
   PasswordValidators,
   StrongPasswordErrors,
   UsernameValidators,
-} from '../../shared/validators';
+} from '../../utils/validators';
 
 @Component({
   selector: 'mm-sign-up',

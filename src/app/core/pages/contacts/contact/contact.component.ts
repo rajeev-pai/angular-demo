@@ -6,8 +6,7 @@ import {
 } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { ContactData } from '../contacts.service';
-import { CrudPressEvents } from '../../../../shared/UI/crud-buttons/crud-buttons.type';
+import { CrudPressEvents, ContactData } from '../../../../helpers/types';
 
 @Component({
   selector: 'mm-contact',

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import { ContactsService, ContactData } from './contacts.service';
+import { ContactsService } from './contacts.service';
+import { ContactData } from '../../../helpers/types';
 
 @Component({
   selector: 'mm-contacts',

@@ -1,6 +1,6 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 
-import { CrudPressEvents } from './crud-buttons.type';
+import { CrudPressEvents } from '../../../helpers/types';
 
 @Component({
   selector: 'mm-crud-buttons',

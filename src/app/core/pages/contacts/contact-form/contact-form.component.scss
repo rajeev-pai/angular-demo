@@ -1,0 +1,17 @@
+.container {
+  max-width: 500px;
+  margin: 10vh auto auto;
+
+  .buttons {
+    margin-top: 32px;
+    margin-left: auto;
+    display: flex;
+    justify-content: flex-end;
+    
+    button {
+      &:not(:last-child) {
+        margin-right: 16px;
+      }
+    }
+  }
+}

@@ -2,24 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-import { GET_CONTACTS } from '../../../utils/apis';
+import { GET_CONTACTS } from '../../../helpers/apis';
+import { ContactData, FetchContactsResponse } from '../../../helpers/types';
 import { AuthService } from '../../../auth/auth.service';
-
-export interface ContactData {
-  id: number;
-  email: string;
-  firstName: string;
-  lastName: string;
-  accountId: number;
-  createdAt: number;
-  updatedAt: number;
-  youOwe: number;
-  owesYou: number;
-}
-
-export interface ContactsData {
-  contacts: ContactData[];
-}
 
 @Injectable({
   providedIn: 'root'
@@ -38,6 +23,16 @@ export class ContactsService {
       'Authorization': `Bearer ${token}`,
     });
 
-    return this.http.get(GET_CONTACTS, { headers }) as Observable<ContactsData>;
+    return this.http
+      .get(GET_CONTACTS, { headers }) as Observable<FetchContactsResponse>;
+  }
+
+  fetchContactById(id: number) {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${this.authService.getAuthToken()}`
+    });
+
+    return this.http.get<ContactData>(`/api/contact/${id}`, { headers });
   }
 }
