@@ -1,12 +1,16 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
+
+import { 
+  CREATE_CONTACT, 
+  UPDATE_CONTACT,
+} from '../../../../helpers/apis';
 
 import {
   CreateContactData,
   UpdateContactData,
   ContactData,
 } from '../../../../helpers/types';
-import { AuthService } from '../../../../auth/auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,32 +19,13 @@ export class ContactFormService {
 
   constructor(
     private http: HttpClient,
-    private authService: AuthService,
   ) { }
 
   createContact(data: CreateContactData) {
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${this.authService.getAuthToken()}`
-    });
-
-    return this.http.post<ContactData>(
-      '/api/contacts/create',
-      data,
-      { headers }
-    );
+    return this.http.post<ContactData>(CREATE_CONTACT, data);
   }
 
   updateContact(data: UpdateContactData) {
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${this.authService.getAuthToken()}`
-    });
-
-    return this.http.patch<ContactData>(
-      '/api/contacts/update',
-      data,
-      { headers }
-    );
+    return this.http.patch<ContactData>(UPDATE_CONTACT, data);
   }
 }

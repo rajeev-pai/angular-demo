@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+
 
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
@@ -28,7 +28,6 @@ import { SignUpComponent } from './sign-up/sign-up.component';
     FormsModule,
     ReactiveFormsModule,
     CommonModule,
-    HttpClientModule,
   ],
   providers: []
 })
