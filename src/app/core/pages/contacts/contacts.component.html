@@ -7,8 +7,8 @@
   </div>
 
   <div class="contacts">
-    <mm-contact [contactToDisplay]="contact"
-      (favorite)="favouriteChanged($event)" *ngFor="let contact of contacts">
+    <mm-contact [contactToDisplay]="contact" (refresh)="fetchContacts()"
+      *ngFor="let contact of contacts">
     </mm-contact>
   </div>
 </div>

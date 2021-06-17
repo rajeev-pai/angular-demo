@@ -8,6 +8,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { ContactsComponent } from './pages/contacts/contacts.component';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -42,6 +43,7 @@ import { ContactViewComponent } from './pages/contacts/contact-view/contact-view
     FormsModule,
     MatFormFieldModule,
     MatInputModule,
+    MatDialogModule,
   ]
 })
 export class CoreModule { }

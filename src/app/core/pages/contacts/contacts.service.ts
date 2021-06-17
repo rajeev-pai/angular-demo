@@ -2,7 +2,11 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-import { GET_CONTACTS, GET_CONTACT } from '../../../helpers/apis';
+import { 
+  GET_CONTACTS, 
+  GET_CONTACT,
+  DELETE_CONTACT,
+} from '../../../helpers/apis';
 import { ContactData, FetchContactsResponse } from '../../../helpers/types';
 
 @Injectable({
@@ -21,5 +25,9 @@ export class ContactsService {
 
   fetchContactById(id: number) {
     return this.http.get<ContactData>(`${GET_CONTACT}/${id}`);
+  }
+
+  deleteContact(id: number) {
+    return this.http.delete<{ success: boolean }>(`${DELETE_CONTACT}/${id}`);
   }
 }

@@ -16,14 +16,18 @@ export class ContactsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.fetchContacts();
+  }
+
+  favouriteChanged(e: boolean) {
+    console.log('New favourite value: ', e);
+  }
+
+  fetchContacts() {
     this.contactsService
       .fetchContacts()
       .subscribe(res => {
         this.contacts = res.contacts;
       });
-  }
-
-  favouriteChanged(e: boolean) {
-    console.log('New favourite value: ', e);
   }
 }
