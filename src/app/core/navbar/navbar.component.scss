@@ -3,6 +3,12 @@
   flex-direction: column;
   height: 100%;
 
+  .badge {
+    color: white;
+    cursor: pointer;
+    text-decoration: none;
+  }
+
   .contents {
     flex-grow: 1;
     overflow-y: auto;
