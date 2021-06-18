@@ -1,4 +1,6 @@
-<div class="contact" (click)="onViewContact()">
+<div class="contact" (click)="onViewContact()"
+  [ngStyle]="{ 'border-color': isLast ? 'transparent' : '' }">
+
   <div class="image">
     <img src="assets/images/contact.png" alt="Contact Profile Image">
   </div>
@@ -23,6 +25,7 @@
   </div>
 
   <div class="buttons">
-    <mm-crud-buttons [hideAddIcon]="true" (press)="onCaptureEvent($event)"></mm-crud-buttons>
+    <mm-crud-buttons [hideAddIcon]="true" (press)="onCaptureEvent($event)">
+    </mm-crud-buttons>
   </div>
 </div>

@@ -19,6 +19,7 @@ import { ContactsService } from '../contacts.service';
 export class ContactComponent {
 
   @Input('contactToDisplay') contact!: ContactData;
+  @Input('isLast') isLast!: boolean;
 
   @Output('refresh') refresh = new EventEmitter();
 
