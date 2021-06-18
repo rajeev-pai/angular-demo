@@ -30,8 +30,6 @@ export class ContactFormComponent implements OnInit {
   ngOnInit() {
     this.activatedRoute.params
       .subscribe(param => {
-        // this.contactId = parseInt(param['id'], 10);
-
         if (param['id']) {
           this.contactId = +param['id'];
           this.title = 'Edit Contact';
@@ -48,8 +46,6 @@ export class ContactFormComponent implements OnInit {
             });
         }
       });
-
-    // console.log(this.activatedRoute.snapshot.params['id']);
   }
 
   onSubmitForm() {

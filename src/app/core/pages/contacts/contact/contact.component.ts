@@ -67,12 +67,6 @@ export class ContactComponent {
           deleteFunc: this.deleteContact
         },
       });
-
-    // this.deleteModalRef
-    //   .afterClosed()
-    //   .subscribe(result => {
-        
-    //   });
   }
 
   private deleteContact = () => {

@@ -1,8 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+
+import { Transaction } from '../../../../helpers/types';
 
 @Component({
-  selector: 'app-transaction',
+  selector: 'mm-transaction',
   templateUrl: './transaction.component.html',
   styleUrls: ['./transaction.component.scss']
 })
-export class TransactionComponent { }
+export class TransactionComponent { 
+
+  @Input('transaction') txn!: Transaction;
+}

@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -18,6 +19,7 @@ import { DeleteConfirmationModalComponent } from './UI/delete-confirmation-modal
     MatIconModule,
     MatButtonModule,
     MatDialogModule,
+    CommonModule,
   ],
   exports: [
     CrudButtonsComponent,
