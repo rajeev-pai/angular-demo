@@ -24,11 +24,12 @@ export class ContactViewComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.activatedRoute.params.subscribe(param => {
-      this.contactId = +param['id'];
-      this.fetchContact();
-      this.fetchTransactions();
-    });
+    this.activatedRoute.params
+      .subscribe(param => {
+        this.contactId = +param['id'];
+        this.fetchContact();
+        this.fetchTransactions();
+      });
   }
 
   get fullName() {

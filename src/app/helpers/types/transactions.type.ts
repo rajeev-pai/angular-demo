@@ -1,6 +1,6 @@
 export enum TransactionTypeCode {
-  YOU_OWE,
-  OWES_YOU,
+  YOU_OWE, // 0
+  OWES_YOU, // 1
 }
 
 export interface Transaction {

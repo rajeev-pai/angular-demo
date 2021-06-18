@@ -31,7 +31,8 @@
   </div>
 
   <div class="transactions">
-    <mm-transaction *ngFor="let transaction of transactions"
-      [transaction]="transaction"></mm-transaction>
+    <mm-transaction
+      *ngFor="let transaction of transactions; last as isLastIteration"
+      [transaction]="transaction" [isLast]="isLastIteration"></mm-transaction>
   </div>
 </div>

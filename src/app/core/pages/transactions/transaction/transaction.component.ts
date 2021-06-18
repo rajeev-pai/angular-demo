@@ -10,6 +10,7 @@ import { Transaction, TransactionTypeCode } from '../../../../helpers/types';
 export class TransactionComponent {
 
   @Input('transaction') txn!: Transaction;
+  @Input('isLast') isLast!: boolean;
 
   get containerStyleClass() {
     return (

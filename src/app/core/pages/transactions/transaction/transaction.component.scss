@@ -4,7 +4,7 @@
   display: flex;
   align-items: center;
   padding: 16px 0;
-  border-top: 1px solid $primary-color;
+  border-bottom: 1px solid $primary-color;
 
   .contact-info {
     width: 25%;
@@ -21,15 +21,25 @@
 
     .note {
       font-weight: 500;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .inner_container {
+      display: flex;
+
       .date_time {
         color: $gray;
+        flex-shrink: 0;
       }
 
       .description {
         margin-left: 16px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: block;
       }
     }
   }
