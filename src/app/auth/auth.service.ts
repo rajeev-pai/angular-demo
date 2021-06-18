@@ -12,7 +12,11 @@ import {
   SignUpFormData,
   LoginResponse,
 } from '../helpers/types';
-import { LOGIN, SIGNUP } from '../helpers/apis';
+import { 
+  LOGIN, 
+  SIGNUP,
+  CHECK_AUTH,
+} from '../helpers/apis';
 
 const AUTH_KEY = 'auth';
 
@@ -46,5 +50,9 @@ export class AuthService {
 
   getAuthToken() {
     return this.cookieService.get(AUTH_KEY);
+  }
+
+  checkAuthValidity() {
+    return this.http.get(CHECK_AUTH);
   }
 }
