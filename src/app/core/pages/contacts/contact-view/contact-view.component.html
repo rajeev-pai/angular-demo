@@ -33,6 +33,7 @@
   <div class="transactions">
     <mm-transaction
       *ngFor="let transaction of transactions; last as isLastIteration"
-      [transaction]="transaction" [isLast]="isLastIteration"></mm-transaction>
+      [transaction]="transaction" [isLast]="isLastIteration"
+      [hideContactName]="true" (refresh)="refreshList()"></mm-transaction>
   </div>
 </div>

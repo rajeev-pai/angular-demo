@@ -51,4 +51,12 @@ export class ContactViewComponent implements OnInit {
         this.transactions = res.transactions;
       });
   }
+
+  onAddTransaction() {
+    
+  }
+
+  refreshList() {
+    
+  }
 }

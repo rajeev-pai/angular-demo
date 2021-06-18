@@ -2,7 +2,7 @@
   [ngStyle]="{ 'border-color': isLast ? 'transparent' : '' }">
 
   <div class="contact-info">
-    <div class="name">CONTACT NAME</div>
+    <div class="name" *ngIf="!hideName">CONTACT NAME</div>
     <div class="transaction_type">{{ transactionType }}</div>
   </div>
 
@@ -19,5 +19,6 @@
     <span>{{ txn.amount | currency:'INR' }}</span>
   </div>
 
-  <mm-crud-buttons [hideAddIcon]="true" [hideViewIcon]="true"></mm-crud-buttons>
+  <mm-crud-buttons [hideAddIcon]="true" (press)="onButtonAction($event)">
+  </mm-crud-buttons>
 </div>

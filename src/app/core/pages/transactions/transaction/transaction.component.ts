@@ -1,6 +1,15 @@
-import { Component, Input } from '@angular/core';
+import { 
+  Component, 
+  Input,
+  Output,
+  EventEmitter,
+} from '@angular/core';
 
-import { Transaction, TransactionTypeCode } from '../../../../helpers/types';
+import {
+  Transaction,
+  TransactionTypeCode,
+  CrudPressEvents,
+} from '../../../../helpers/types';
 
 @Component({
   selector: 'mm-transaction',
@@ -11,6 +20,9 @@ export class TransactionComponent {
 
   @Input('transaction') txn!: Transaction;
   @Input('isLast') isLast!: boolean;
+  @Input('hideContactName') hideName!: boolean;
+
+  @Output('refresh') refreshList = new EventEmitter();
 
   get containerStyleClass() {
     return (
@@ -38,5 +50,33 @@ export class TransactionComponent {
         ? this.txn.description
         : 'No description provided!'
     );
+  }
+
+  onButtonAction(type: CrudPressEvents) {
+    switch (type) {
+      case 'view':
+        this.viewTransaction();
+        break;
+
+      case 'edit':
+        this.prepareToEditTransaction();
+        break;
+
+      case 'delete':
+        this.askDeleteConfirmation();
+        break;
+    }
+  }
+
+  viewTransaction() {
+
+  }
+
+  prepareToEditTransaction() {
+
+  }
+
+  askDeleteConfirmation() {
+
   }
 }
