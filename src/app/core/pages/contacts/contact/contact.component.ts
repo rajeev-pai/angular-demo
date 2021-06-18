@@ -51,11 +51,11 @@ export class ContactComponent {
   }
 
   onViewContact() {
-    this.router.navigate(['/app/contact', this.contact.id]);
+    this.router.navigate(['/contact', this.contact.id]);
   }
 
   onEditContact() {
-    this.router.navigate(['/app/edit-contact', this.contact.id]);
+    this.router.navigate(['/edit-contact', this.contact.id]);
   }
 
   onConfirmDelete() {

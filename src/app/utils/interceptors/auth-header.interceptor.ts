@@ -61,9 +61,12 @@ export class AuthHeaderInterceptor implements HttpInterceptor {
    */
   private getHeadersToAdd(currentHeaders: HttpHeaders): HttpHeaders {
     // Tuple array containing all the headers to be added to the request.
-    const headersToAdd: [string, string][] = [
-      ['Authorization', `Bearer ${this.authService.getAuthToken()}`]
-    ];
+    const headersToAdd: [string, string][] = [];
+    const authKey = this.authService.getAuthToken();
+
+    if (authKey) {
+      headersToAdd.push(['Authorization', `Bearer ${authKey}`]);
+    }
 
     // Ignore if the request already has the 'Content-Type' header.
     if (!currentHeaders.has('Content-Type')) {

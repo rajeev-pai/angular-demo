@@ -53,7 +53,7 @@ export class ContactFormComponent implements OnInit {
       this.contactFormService
         .createContact(this.form.value)
         .subscribe(res => {
-          this.router.navigateByUrl('/app/contacts');
+          this.router.navigateByUrl('/contacts');
         });
     } else {
       const updateData: UpdateContactData = {
@@ -64,7 +64,7 @@ export class ContactFormComponent implements OnInit {
       this.contactFormService
         .updateContact(updateData)
         .subscribe(res => {
-          this.router.navigateByUrl('/app/contacts');
+          this.router.navigateByUrl('/contacts');
         });
     }
   }

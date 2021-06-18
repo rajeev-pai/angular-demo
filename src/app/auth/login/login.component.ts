@@ -23,7 +23,7 @@ export class LoginComponent {
       .login(form.value)
       .subscribe(
         _ => {
-          this.router.navigateByUrl('/app');
+          this.router.navigateByUrl('/contacts');
         },
         err => {
           this.loginError = true;

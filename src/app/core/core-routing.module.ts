@@ -6,11 +6,13 @@ import { ContactsComponent } from './pages/contacts/contacts.component';
 import { ContactFormComponent } from './pages/contacts/contact-form/contact-form.component';
 import { ContactViewComponent } from './pages/contacts/contact-view/contact-view.component';
 import { TransactionsComponent } from './pages/transactions/transactions.component';
+import { CorePageGuard } from './core-page.guard';
 
 const routes: Route[] = [
   {
-    path: 'app',
+    path: '',
     component: NavbarComponent,
+    canActivate: [CorePageGuard],
     children: [
       {
         path: 'contacts',

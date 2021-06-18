@@ -53,6 +53,6 @@ export class AuthService {
   }
 
   checkAuthValidity() {
-    return this.http.get(CHECK_AUTH);
+    return this.http.get(CHECK_AUTH) as Observable<{ auth: boolean; }>;
   }
 }
