@@ -1,27 +1,37 @@
 <div class="container">
-  <div class="contact_data">
+  <div class="contact_data" *ngIf="contact">
     <div class="general_info">
       <img src="assets/images/contact.png" alt="">
 
       <div class="general_info--inner_container">
-        <div class="contact_name">Courage The Cowardly Dog</div>
-        <div class="date">12, March 2021</div>
-        <div class="email">courage@email.com</div>
+        <div class="contact_name">{{ fullName }}</div>
+        <div class="date">{{ contact.createdAt | date:'fullDate' }}</div>
+        <div class="email">{{ contact.email }}</div>
       </div>
     </div>
 
     <div class="transaction_info">
       <div class="you_owe">
-        <span class="text">You owe: </span><span class="amount">1000</span>
+        <span class="text">You owe: </span><span class="amount">{{
+          contact.youOwe | currency:'INR' }}</span>
       </div>
 
       <div class="owes_you">
-        <span class="text">Owes you: </span><span class="amount">100</span>
+        <span class="text">Owes you: </span><span class="amount">{{
+          contact.owesYou | currency:'INR'
+          }}</span>
       </div>
+    </div>
+
+    <div class="buttons">
+      <button mat-fab color="accent">
+        <mat-icon>add</mat-icon>
+      </button>
     </div>
   </div>
 
   <div class="transactions">
-    <mm-transaction></mm-transaction>
+    <mm-transaction *ngFor="let transaction of transactions"
+      [transaction]="transaction"></mm-transaction>
   </div>
 </div>

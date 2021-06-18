@@ -1,1 +1,20 @@
-<p>transaction works!</p>
+<div class="container" [ngClass]="containerStyleClass">
+  <div class="contact-info">
+    <div class="name">CONTACT NAME</div>
+    <div class="transaction_type">{{ transactionType }}</div>
+  </div>
+
+  <div class="transaction_details">
+    <div class="note">{{ note }}</div>
+    <div class="inner_container">
+      <span class="date_time">{{ txn.dateTime | date: 'MMMM d, y, h:mm a' }}</span>
+      <span class="description">{{ description }}</span>
+    </div>
+  </div>
+
+  <div class="transaction_amount">
+    <span>{{ txn.amount | currency:'INR' }}</span>
+  </div>
+
+  <mm-crud-buttons [hideAddIcon]="true"></mm-crud-buttons>
+</div>

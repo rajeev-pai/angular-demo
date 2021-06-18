@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import {
   GET_CONTACT_TXNS,
 } from '../../../helpers/apis';
+import { ContactTransactionsResponse } from '../../../helpers/types';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,7 @@ export class TransactionsService {
   ) { }
 
   fetchTransactionsOfContact(id: number) {
-    return this.http.get(`${GET_CONTACT_TXNS}/${id}`);
+    return this.http
+      .get<ContactTransactionsResponse>(`${GET_CONTACT_TXNS}/${id}`);
   }
 }
