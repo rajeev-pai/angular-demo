@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
-import {
-  HttpClient,
-} from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
@@ -12,8 +10,9 @@ import {
   SignUpFormData,
   LoginResponse,
 } from '../helpers/types';
-import { 
-  LOGIN, 
+
+import {
+  LOGIN,
   SIGNUP,
   CHECK_AUTH,
 } from '../helpers/apis';
@@ -36,6 +35,7 @@ export class AuthService {
       .pipe(
         tap(res => {
           const expiryTime = Date.now() + (24 * 60 * 60 * 1000);
+
           this.cookieService.set(AUTH_KEY, res.token, {
             path: '/',
             expires: new Date(expiryTime),

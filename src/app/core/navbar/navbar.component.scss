@@ -1,12 +1,35 @@
+@import "../../colors";
+
 .container {
   display: flex;
   flex-direction: column;
   height: 100%;
 
-  .badge {
-    color: white;
-    cursor: pointer;
-    text-decoration: none;
+  .toolbar_container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+
+    .badge {
+      color: white;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .user_details {
+      display: flex;
+      align-items: center;
+      font-weight: 400;
+
+      .user_badge {
+        
+      }
+
+      .user_name {
+        font-size: 18px;
+      }
+    }
   }
 
   .contents {

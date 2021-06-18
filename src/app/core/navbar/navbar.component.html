@@ -1,9 +1,16 @@
 <div class="container">
   <mat-toolbar color="primary">
-    <a class="badge" routerLink="/app">Money Manager</a>
-    <span class="example-spacer"></span>
+    <div class="toolbar_container">
+      <a class="badge" routerLink="/app">Money Manager</a>
+
+      <div class="user_details">
+        <!-- <div class="user_badge">JD</div> -->
+        <div class="user_name">John Doe</div>
+        <mat-icon>arrow_drop_down</mat-icon>
+      </div>
+    </div>
   </mat-toolbar>
-  
+
   <div class="contents">
     <router-outlet></router-outlet>
   </div>
