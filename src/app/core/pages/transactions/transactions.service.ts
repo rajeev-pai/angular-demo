@@ -7,8 +7,6 @@ import {
   GET_ACCOUNT_TXN_SUMMARY,
   GET_TXN,
   GET_CONTACT_TXN_SUMMARY,
-  CREATE_TXN,
-  UPDATE_TXN,
   DELETE_TXN,
 } from '../../../helpers/apis';
 
@@ -16,7 +14,6 @@ import {
   TransactionsResponse,
   TransactionSummary,
   Transaction,
-  CreateOrUpdateTransactionData,
 } from '../../../helpers/types';
 
 @Injectable({
@@ -48,14 +45,6 @@ export class TransactionsService {
   fetchContactTransactionSummary(contactId: number) {
     return this.http
       .get<TransactionSummary>(`${GET_CONTACT_TXN_SUMMARY}/${contactId}`);
-  }
-
-  createNewTransaction(data: CreateOrUpdateTransactionData) {
-    return this.http.post<Transaction>(CREATE_TXN, data);
-  }
-
-  updateTransaction(txnId: number, data: CreateOrUpdateTransactionData) {
-    return this.http.patch<Transaction>(`${UPDATE_TXN}/${txnId}`, data);
   }
 
   deleteTransaction(id: number) {
