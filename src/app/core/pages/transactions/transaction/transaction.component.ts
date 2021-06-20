@@ -1,8 +1,9 @@
-import { 
-  Component, 
+import {
+  Component,
   Input,
   Output,
   EventEmitter,
+  OnInit,
 } from '@angular/core';
 
 import {
@@ -11,18 +12,26 @@ import {
   CrudPressEvents,
 } from '../../../../helpers/types';
 
+import { ContactsService } from '../../contacts/contacts.service';
+
 @Component({
   selector: 'mm-transaction',
   templateUrl: './transaction.component.html',
   styleUrls: ['./transaction.component.scss']
 })
-export class TransactionComponent {
+export class TransactionComponent implements OnInit {
 
   @Input('transaction') txn!: Transaction;
   @Input('isLast') isLast!: boolean;
   @Input('hideContactName') hideName!: boolean;
 
   @Output('refresh') refreshList = new EventEmitter();
+
+  constructor(
+    private contactsService: ContactsService,
+  ) { }
+
+  ngOnInit() { }
 
   get owesYou(): boolean {
     return this.txn.type === TransactionTypeCode.OWES_YOU;
@@ -50,6 +59,10 @@ export class TransactionComponent {
         ? this.txn.description
         : 'No description provided!'
     );
+  }
+
+  getContactName() {
+    return 'CONTACT NAME';
   }
 
   onButtonAction(type: CrudPressEvents) {
