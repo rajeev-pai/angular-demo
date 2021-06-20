@@ -1,1 +1,38 @@
-<p>transactions works!</p>
+<div class="container">
+  <div class="user_data">
+    <div class="general_info">
+      <img src="assets/images/contact.png" alt="">
+
+      <div class="general_info--inner_container">
+        <div class="user_name">USER NAME</div>
+        <div class="email">user@email.com</div>
+      </div>
+    </div>
+
+    <div class="transaction_info">
+      <div class="you_owe">
+        <span class="text">You owe: </span><span class="amount">{{
+          10000 | currency:'INR' }}</span>
+      </div>
+
+      <div class="owes_you">
+        <span class="text">Owes you: </span><span class="amount">{{
+          5000 | currency:'INR'
+          }}</span>
+      </div>
+    </div>
+
+    <div class="buttons">
+      <button mat-fab color="accent">
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <div class="transactions">
+    <mm-transaction
+      *ngFor="let transaction of transactions; last as isLastIteration"
+      [transaction]="transaction" [isLast]="isLastIteration"
+      (refresh)="refreshList()"></mm-transaction>
+  </div>
+</div>
