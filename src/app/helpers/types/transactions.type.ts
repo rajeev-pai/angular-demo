@@ -16,7 +16,7 @@ export interface Transaction {
   updatedAt: number;
 }
 
-export interface ContactTransactionsResponse {
+export interface TransactionsResponse {
   transactions: Transaction[];
 }
 
