@@ -1,5 +1,5 @@
-<div class="container" [ngClass]="containerStyleClass"
-  [ngClass]="{ 'hide_name': hideName }"
+<div class="container"
+  [ngClass]="{ 'hide_name': hideName, 'owes_you': owesYou, 'is_owed': isOwed }"
   [ngStyle]="{ 'border-color': isLast ? 'transparent' : '' }">
 
   <div class="contact_info">

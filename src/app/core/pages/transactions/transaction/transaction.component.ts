@@ -24,12 +24,12 @@ export class TransactionComponent {
 
   @Output('refresh') refreshList = new EventEmitter();
 
-  get containerStyleClass() {
-    return (
-      (this.txn.type === TransactionTypeCode.OWES_YOU)
-        ? 'owes_you'
-        : 'is_owed'
-    );
+  get owesYou(): boolean {
+    return this.txn.type === TransactionTypeCode.OWES_YOU;
+  }
+
+  get isOwed(): boolean {
+    return this.txn.type === TransactionTypeCode.YOU_OWE;
   }
 
   get transactionType() {
