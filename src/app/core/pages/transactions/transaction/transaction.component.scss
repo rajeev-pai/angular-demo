@@ -6,7 +6,7 @@
   padding: 16px 0;
   border-bottom: 1px solid $primary-color;
 
-  .contact-info {
+  .contact_info {
     width: 25%;
 
     .name {
@@ -16,7 +16,7 @@
   }
 
   .transaction_details {
-    width: 30%;
+    width: 40%;
     margin-left: auto;
 
     .note {
@@ -45,7 +45,7 @@
   }
 
   .transaction_amount {
-    width: 20%;
+    width: 10%;
     margin-left: auto;
     margin-right: 32px;
     text-align: right;
@@ -56,6 +56,16 @@
   &.is_owed {
     .transaction_amount {
       color: $red;
+    }
+  }
+
+  &.hide_name {
+    .contact_info {
+      width: 10%;
+    }
+
+    .transaction_details {
+      width: 55%;
     }
   }
 }

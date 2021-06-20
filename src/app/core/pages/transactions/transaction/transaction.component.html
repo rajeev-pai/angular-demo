@@ -1,7 +1,8 @@
 <div class="container" [ngClass]="containerStyleClass"
+  [ngClass]="{ 'hide_name': hideName }"
   [ngStyle]="{ 'border-color': isLast ? 'transparent' : '' }">
 
-  <div class="contact-info">
+  <div class="contact_info">
     <div class="name" *ngIf="!hideName">CONTACT NAME</div>
     <div class="transaction_type">{{ transactionType }}</div>
   </div>
