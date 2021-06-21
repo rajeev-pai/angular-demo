@@ -5,11 +5,14 @@ import {
   EventEmitter,
   OnInit,
 } from '@angular/core';
+import { Observable } from 'rxjs';
+import { shareReplay, map } from 'rxjs/operators';
 
 import {
   Transaction,
   TransactionTypeCode,
   CrudPressEvents,
+  ContactData,
 } from '../../../../helpers/types';
 
 import { ContactsService } from '../../contacts/contacts.service';
@@ -27,11 +30,21 @@ export class TransactionComponent implements OnInit {
 
   @Output('refresh') refreshList = new EventEmitter();
 
+  private fetchContactHttp$!: Observable<ContactData>;
+
   constructor(
     private contactsService: ContactsService,
   ) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.fetchContactHttp$ = (
+      this.contactsService
+        .fetchContactById(this.txn.contactId)
+        .pipe(
+          shareReplay(),
+        )
+    );
+  }
 
   get owesYou(): boolean {
     return this.txn.type === TransactionTypeCode.OWES_YOU;
@@ -62,7 +75,10 @@ export class TransactionComponent implements OnInit {
   }
 
   getContactName() {
-    return 'CONTACT NAME';
+    return this.fetchContactHttp$
+      .pipe(
+        map(res => `${res.firstName} ${res.lastName}`)
+      );
   }
 
   onButtonAction(type: CrudPressEvents) {

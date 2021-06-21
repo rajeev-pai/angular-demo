@@ -3,7 +3,9 @@
   [ngStyle]="{ 'border-color': isLast ? 'transparent' : '' }">
 
   <div class="contact_info">
-    <div class="name" *ngIf="!hideName">{{ getContactName() }}</div>
+    <div class="name" *ngIf="!hideName">
+      {{ getContactName() | async }}
+    </div>
     <div class="transaction_type">{{ transactionType }}</div>
   </div>
 
