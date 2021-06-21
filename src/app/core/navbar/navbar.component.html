@@ -3,6 +3,11 @@
     <div class="toolbar_container">
       <a class="badge" routerLink="/app">Money Manager</a>
 
+      <div class="links">
+        <a class="link" *ngFor="let link of links" [routerLink]="link.path">{{
+          link.name }}</a>
+      </div>
+
       <div class="user_details">
         <!-- <div class="user_badge">JD</div> -->
         <div class="user_name">John Doe</div>
