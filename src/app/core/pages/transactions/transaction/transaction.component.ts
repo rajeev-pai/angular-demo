@@ -5,14 +5,14 @@ import {
   EventEmitter,
   OnInit,
 } from '@angular/core';
-import { Observable } from 'rxjs';
-import { shareReplay, map } from 'rxjs/operators';
+// import { Observable } from 'rxjs';
+// import { shareReplay, map } from 'rxjs/operators';
 
 import {
   Transaction,
   TransactionTypeCode,
   CrudPressEvents,
-  ContactData,
+  // ContactData,
 } from '../../../../helpers/types';
 
 import { ContactsService } from '../../contacts/contacts.service';
