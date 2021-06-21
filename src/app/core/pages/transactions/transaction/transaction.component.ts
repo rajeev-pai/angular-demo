@@ -30,20 +30,20 @@ export class TransactionComponent implements OnInit {
 
   @Output('refresh') refreshList = new EventEmitter();
 
-  private fetchContactHttp$!: Observable<ContactData>;
+  // private fetchContactHttp$!: Observable<ContactData>;
 
   constructor(
     private contactsService: ContactsService,
   ) { }
 
   ngOnInit() {
-    this.fetchContactHttp$ = (
-      this.contactsService
-        .fetchContactById(this.txn.contactId)
-        .pipe(
-          shareReplay(),
-        )
-    );
+    // this.fetchContactHttp$ = (
+    //   this.contactsService
+    //     .fetchContactById(this.txn.contactId)
+    //     .pipe(
+    //       shareReplay(),
+    //     )
+    // );
   }
 
   get owesYou(): boolean {
@@ -75,10 +75,13 @@ export class TransactionComponent implements OnInit {
   }
 
   getContactName() {
-    return this.fetchContactHttp$
-      .pipe(
-        map(res => `${res.firstName} ${res.lastName}`)
-      );
+    // return this.fetchContactHttp$
+    //   .pipe(
+    //     map(contact => `${contact.firstName} ${contact.lastName}`),
+    //   );
+
+    const contact = this.contactsService.getContactById(this.txn.contactId);
+    return contact ? `${contact.firstName} ${contact.lastName}` : 'Loading...';
   }
 
   onButtonAction(type: CrudPressEvents) {

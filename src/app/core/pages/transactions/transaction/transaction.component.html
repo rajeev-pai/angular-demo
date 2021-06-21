@@ -4,7 +4,8 @@
 
   <div class="contact_info">
     <div class="name" *ngIf="!hideName">
-      {{ getContactName() | async }}
+      <!-- {{ getContactName() | async }} -->
+      {{ getContactName() }}
     </div>
     <div class="transaction_type">{{ transactionType }}</div>
   </div>
