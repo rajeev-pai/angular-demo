@@ -1,4 +1,4 @@
-<div class="contact" (click)="onViewContact()"
+<a class="contact" [routerLink]="['/contact', contact.id]"
   [ngStyle]="{ 'border-color': isLast ? 'transparent' : '' }">
 
   <div class="image">
@@ -28,4 +28,4 @@
     <mm-crud-buttons [hideAddIcon]="true" (press)="onCaptureEvent($event)">
     </mm-crud-buttons>
   </div>
-</div>
+</a>
