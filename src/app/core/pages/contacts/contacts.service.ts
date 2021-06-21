@@ -8,8 +8,8 @@ import {
   DELETE_CONTACT,
 } from '../../../helpers/apis';
 
-import { 
-  ContactData, 
+import {
+  ContactData,
   FetchContactsResponse,
 } from '../../../helpers/types';
 
@@ -67,11 +67,20 @@ export class ContactsService {
   }
 
   private updateContactList(contact: ContactData) {
-    const index = this.contactIdsBeingFetched.indexOf(contact.id);
-    this.contacts.push(contact);
+    const indexOfContact = this.contacts.findIndex(c => c.id === contact.id);
 
-    if (index !== -1) {
-      this.contactIdsBeingFetched.splice(index, 1);
+    // Update the contact in the list.
+    if (indexOfContact === -1) {
+      this.contacts.push(contact);
+    } else {
+      this.contacts[indexOfContact] = contact;
+    }
+
+    const indexOfIdBeingFetched = this.contactIdsBeingFetched
+      .indexOf(contact.id);
+
+    if (indexOfIdBeingFetched !== -1) {
+      this.contactIdsBeingFetched.splice(indexOfIdBeingFetched, 1);
     }
   }
 }
