@@ -13,8 +13,6 @@ import {
   FetchContactsResponse,
 } from '../../../helpers/types';
 
-
-
 @Injectable({
   providedIn: 'root'
 })
@@ -63,7 +61,15 @@ export class ContactsService {
   }
 
   deleteContact(id: number) {
-    return this.http.delete<{ success: boolean }>(`${DELETE_CONTACT}/${id}`);
+    return this.http
+      .delete<{ success: boolean }>(`${DELETE_CONTACT}/${id}`)
+      .pipe(
+        tap(res => {
+          if (res.success) {
+            this.removeContactFromList(id);
+          }
+        }),
+      );
   }
 
   private updateContactList(contact: ContactData) {
@@ -81,6 +87,14 @@ export class ContactsService {
 
     if (indexOfIdBeingFetched !== -1) {
       this.contactIdsBeingFetched.splice(indexOfIdBeingFetched, 1);
+    }
+  }
+
+  private removeContactFromList(id: number) {
+    const index = this.contacts.findIndex(c => c.id === id);
+
+    if (index !== -1) {
+      this.contacts.splice(index, 1);
     }
   }
 }
