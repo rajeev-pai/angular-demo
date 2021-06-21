@@ -9,12 +9,14 @@ import {
   LoginFormData,
   SignUpFormData,
   LoginResponse,
+  AccountDetailsResponse,
 } from '../helpers/types';
 
 import {
   LOGIN,
   SIGNUP,
   CHECK_AUTH,
+  GET_ACCOUNT_DETAILS,
 } from '../helpers/apis';
 
 const AUTH_KEY = 'auth';
@@ -54,5 +56,9 @@ export class AuthService {
 
   checkAuthValidity() {
     return this.http.get(CHECK_AUTH) as Observable<{ auth: boolean; }>;
+  }
+
+  getAccountDetails() {
+    return this.http.get<AccountDetailsResponse>(GET_ACCOUNT_DETAILS);
   }
 }
