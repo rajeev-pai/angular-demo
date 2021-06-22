@@ -1,17 +1,27 @@
-<h2>Settings</h2>
+<div class="container">
+  <div class="header">
+    <h1>Settings</h1>
+  </div>
 
-<form ngForm #form="ngForm" autocomplete="off" (ngSubmit)="onSubmit()">
-  <mat-form-field class="full-width">
-    <mat-label>Username</mat-label>
+  <div class="form_container">
+    <h3>Update user</h3>
 
-    <input ngModel name="username" #userName="ngModel" required type="text"
-      matInput placeholder="Username">
+    <form ngForm #form="ngForm" autocomplete="off" (ngSubmit)="onSubmit()">
+      <mat-form-field class="full-width">
+        <mat-label>Username</mat-label>
 
-    <mat-error *ngIf="userName.touched">
-      <span *ngIf="userName.hasError('required')">This field is
-        required.</span>
-    </mat-error>
-  </mat-form-field>
+        <input ngModel name="username" #userName="ngModel" required type="text"
+          matInput placeholder="Username">
 
-  <button type="submit" mat-raised-button color="accent">Update</button>
-</form>
+        <mat-error *ngIf="userName.touched">
+          <span *ngIf="userName.hasError('required')">This field is
+            required.</span>
+        </mat-error>
+      </mat-form-field>
+
+      <div class="buttons">
+        <button type="submit" mat-raised-button color="accent">Update</button>
+      </div>
+    </form>
+  </div>
+</div>
