@@ -1,6 +1,6 @@
-import { 
-  Component, 
-  ViewChild, 
+import {
+  Component,
+  ViewChild,
   AfterViewInit,
   OnDestroy
 } from '@angular/core';
@@ -43,6 +43,10 @@ export class SettingsComponent implements AfterViewInit, OnDestroy {
   }
 
   onSubmit() {
+    if (!this.form.valid) {
+      return;
+    }
+
     this.authService
       .updateUsername(this.form.value)
       .subscribe();

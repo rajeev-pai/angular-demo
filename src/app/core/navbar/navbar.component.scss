@@ -42,6 +42,15 @@
       cursor: pointer;
 
       .user_badge {
+        background-color: $accent-color;
+        color: $black;
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-right: 8px;
       }
 
       .user_name {

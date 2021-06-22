@@ -8,7 +8,7 @@
       </div>
 
       <div class="user_details" [matMenuTriggerFor]="menu">
-        <!-- <div class="user_badge">JD</div> -->
+        <div class="user_badge">{{ username | avatar }}</div>
         <div class="user_name">{{ username }}</div>
         <mat-icon>arrow_drop_down</mat-icon>
       </div>
