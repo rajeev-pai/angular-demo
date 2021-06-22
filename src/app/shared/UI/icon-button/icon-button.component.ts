@@ -17,6 +17,7 @@ export class IconButtonComponent {
   @Output('press') press = new EventEmitter();
 
   onClickButton(e: Event) {
+    e.preventDefault();
     e.stopPropagation();
     this.press.emit();
   }
