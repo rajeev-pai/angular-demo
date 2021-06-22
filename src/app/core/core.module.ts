@@ -10,6 +10,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
+import { MatMenuModule } from '@angular/material/menu';
 
 import { ContactsComponent } from './pages/contacts/contacts.component';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -21,6 +22,7 @@ import { TransactionFormComponent } from './pages/transactions/transaction-form/
 import { CoreRoutingModule } from './core-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { ContactViewComponent } from './pages/contacts/contact-view/contact-view.component';
+import { SettingsComponent } from './pages/settings/settings.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +34,7 @@ import { ContactViewComponent } from './pages/contacts/contact-view/contact-view
     TransactionComponent,
     TransactionFormComponent,
     ContactViewComponent,
+    SettingsComponent,
   ],
   imports: [
     MatToolbarModule,
@@ -46,6 +49,7 @@ import { ContactViewComponent } from './pages/contacts/contact-view/contact-view
     MatInputModule,
     MatDialogModule,
     MatSelectModule,
+    MatMenuModule,
   ]
 })
 export class CoreModule { }

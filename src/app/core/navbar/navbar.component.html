@@ -7,11 +7,16 @@
         <a class="link" *ngFor="let link of links" [routerLink]="link.path" routerLinkActive="active">{{ link.name }}</a>
       </div>
 
-      <div class="user_details">
+      <div class="user_details" [matMenuTriggerFor]="menu">
         <!-- <div class="user_badge">JD</div> -->
-        <div class="user_name">John Doe</div>
+        <div class="user_name">{{ username }}</div>
         <mat-icon>arrow_drop_down</mat-icon>
       </div>
+
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item routerLink="/settings">Settings</button>
+        <button mat-menu-item>Logout</button>
+      </mat-menu>
     </div>
   </mat-toolbar>
 
