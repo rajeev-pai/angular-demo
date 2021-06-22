@@ -9,6 +9,7 @@ import { CrudButtonsComponent } from './UI/crud-buttons/crud-buttons.component';
 import { IconButtonComponent } from './UI/icon-button/icon-button.component';
 import { DeleteConfirmationModalComponent } from './UI/delete-confirmation-modal/delete-confirmation-modal.component';
 import { AvatarPipe } from './pipes/avatar.pipe';
+import { PageHeaderComponent } from './UI/page-header/page-header.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { AvatarPipe } from './pipes/avatar.pipe';
     IconButtonComponent,
     DeleteConfirmationModalComponent,
     AvatarPipe,
+    PageHeaderComponent,
   ],
   imports: [
     MatIconModule,
@@ -28,6 +30,7 @@ import { AvatarPipe } from './pipes/avatar.pipe';
     IconButtonComponent,
     DeleteConfirmationModalComponent,
     AvatarPipe,
+    PageHeaderComponent,
   ],
 })
 export class SharedModule { }

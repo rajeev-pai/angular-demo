@@ -8,9 +8,7 @@
   .user_data {
     display: flex;
     align-items: center;
-    margin: 16px 0;
-    padding-bottom: 16px;
-    border-bottom: 2px solid $primary-color;
+    width: 100%;
 
     .general_info {
       display: flex;
