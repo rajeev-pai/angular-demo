@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { Router } from '@angular/router';
+import { Observable, BehaviorSubject, Subject } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
 import { CookieService } from 'ngx-cookie-service';
@@ -30,14 +31,17 @@ const AUTH_KEY = 'auth';
 export class AuthService {
 
   private subject = new BehaviorSubject<User | null>(null);
+  private logoutSubject = new Subject();
   // private user: User | null = null;
 
   // Expose the observable created by the subject.
   user$: Observable<User | null> = this.subject.asObservable();
+  logout$ = this.logoutSubject.asObservable();
 
   constructor(
     private http: HttpClient,
     private cookieService: CookieService,
+    private router: Router,
   ) { }
 
   login(data: LoginFormData) {
@@ -88,6 +92,12 @@ export class AuthService {
           this.subject.next(new User(id, email, username));
         }),
       );
+  }
+
+  logout() {
+    this.cookieService.delete(AUTH_KEY);
+    this.router.navigateByUrl('/login');
+    this.subject.next(null);
   }
 
   // getUser() {

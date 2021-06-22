@@ -55,4 +55,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
   // get username() {
   //   return this.authService.getUser()?.username;
   // }
+
+  onLogout() {
+    this.authService.logout();
+  }
 }

@@ -13,6 +13,8 @@ import {
   FetchContactsResponse,
 } from '../../../helpers/types';
 
+import { AuthService } from '../../../auth/auth.service';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -23,7 +25,15 @@ export class ContactsService {
 
   constructor(
     private http: HttpClient,
-  ) { }
+    private authService: AuthService,
+  ) {
+
+    // Listen to logout events.
+    this.authService.logout$
+      .subscribe(_ => {
+        this.contacts = [];
+      });
+  }
 
   fetchContacts() {
     return this.http
