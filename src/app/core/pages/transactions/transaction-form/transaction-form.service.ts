@@ -6,6 +6,8 @@ import { CREATE_TXN, UPDATE_TXN } from '../../../../helpers/apis';
 import {
   CreateOrUpdateTransactionData,
   Transaction,
+  TransactionTypeCode,
+  TransactionFormField,
 } from '../../../../helpers/types';
 
 @Injectable({
@@ -23,5 +25,37 @@ export class TransactionFormService {
 
   updateTransaction(txnId: number, data: CreateOrUpdateTransactionData) {
     return this.http.patch<Transaction>(`${UPDATE_TXN}/${txnId}`, data);
+  }
+
+  getTransactionFormModel(): TransactionFormField[] {
+    return [
+      {
+        fieldName: 'type',
+        elementType: 'select',
+        options: [
+          { text: 'Owes you', value: TransactionTypeCode.OWES_YOU },
+          { text: 'You owe', value: TransactionTypeCode.YOU_OWE },
+        ],
+        isRequired: true,
+      },
+      {
+        fieldName: 'amount',
+        elementType: 'input',
+        isRequired: true, 
+      },
+      {
+        fieldName: 'dateTime',
+        elementType: 'dateTimePicker',
+        isRequired: true,
+      },
+      {
+        fieldName: 'note',
+        elementType: 'textarea',
+      },
+      {
+        fieldName: 'description',
+        elementType: 'textarea'
+      }
+    ];
   }
 }

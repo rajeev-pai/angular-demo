@@ -33,3 +33,11 @@ export interface CreateOrUpdateTransactionData {
 	note: string;
 	description: string;
 }
+
+export interface TransactionFormField {
+  fieldName: string;
+  elementType: 'select' | 'input' | 'textarea' | 'dateTimePicker',
+  options?: Array<{ text: string; value: any; }>;
+  isRequired?: boolean;
+  isNumber?: boolean;
+}
