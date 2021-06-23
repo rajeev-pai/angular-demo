@@ -28,13 +28,27 @@
       <mat-form-field class="full-width" *ngIf="field.elementType === 'select'">
         <mat-label>{{ field.displayName }}</mat-label>
 
-        <mat-select>
+        <mat-select [formControlName]="field.fieldName">
           <mat-option [value]="option.value"
             *ngFor="let option of field.options">
             {{ option.text }}
           </mat-option>
         </mat-select>
       </mat-form-field>
+
+      <!-- Date time picker -->
+      <mat-form-field class="full-width"
+        *ngIf="field.elementType === 'dateTimePicker'">
+        <input matInput [ngxMatDatetimePicker]="picker"
+          placeholder="Choose a date" [formControlName]="field.fieldName">
+
+        <mat-datepicker-toggle matSuffix [for]="$any(picker)">
+        </mat-datepicker-toggle>
+
+        <ngx-mat-datetime-picker #picker></ngx-mat-datetime-picker>
+      </mat-form-field>
     </div>
   </form>
+
+  <!-- {{ form.value | json }} -->
 </div>

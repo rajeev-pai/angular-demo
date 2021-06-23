@@ -34,11 +34,17 @@ export interface CreateOrUpdateTransactionData {
 	description: string;
 }
 
+export interface TransactionFormOption {
+  text: string; 
+  value: any;
+}
+
 export interface TransactionFormField {
   fieldName: string;
   displayName: string;
   elementType: 'select' | 'input' | 'textarea' | 'dateTimePicker',
-  options?: Array<{ text: string; value: any; }>;
+  options?: TransactionFormOption[];
+  shouldFetchOptions?: boolean;
   isRequired?: boolean;
   isNumber?: boolean;
 }

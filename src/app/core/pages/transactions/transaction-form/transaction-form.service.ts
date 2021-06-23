@@ -34,6 +34,7 @@ export class TransactionFormService {
         displayName: 'Contact',
         elementType: 'select',
         options: [],
+        shouldFetchOptions: true,
         isRequired: true,
       },
       {

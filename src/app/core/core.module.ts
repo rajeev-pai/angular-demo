@@ -11,6 +11,14 @@ import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+
+import { 
+  NgxMatDatetimePickerModule,
+  NgxMatNativeDateModule,
+  NgxMatDateFormats,
+  NGX_MAT_DATE_FORMATS
+} from '@angular-material-components/datetime-picker';
 
 import { ContactsComponent } from './pages/contacts/contacts.component';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -23,6 +31,20 @@ import { CoreRoutingModule } from './core-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { ContactViewComponent } from './pages/contacts/contact-view/contact-view.component';
 import { SettingsComponent } from './pages/settings/settings.component';
+
+
+// If using Moment
+// const CUSTOM_DATE_FORMATS: NgxMatDateFormats = {
+//   parse: {
+//     dateInput: "l, LTS"
+//   },
+//   display: {
+//     dateInput: "l, LTS",
+//     monthYearLabel: "MMM YYYY",
+//     dateA11yLabel: "LL",
+//     monthYearA11yLabel: "MMMM YYYY"
+//   }
+// };
 
 @NgModule({
   declarations: [
@@ -51,6 +73,12 @@ import { SettingsComponent } from './pages/settings/settings.component';
     MatSelectModule,
     MatMenuModule,
     ReactiveFormsModule,
+    NgxMatDatetimePickerModule,
+    MatDatepickerModule,
+    NgxMatNativeDateModule,
+  ],
+  providers: [
+    // { provide: NGX_MAT_DATE_FORMATS, useValue: CUSTOM_DATE_FORMATS }
   ]
 })
 export class CoreModule { }
