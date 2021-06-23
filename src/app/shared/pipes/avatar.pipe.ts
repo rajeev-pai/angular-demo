@@ -4,6 +4,10 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class AvatarPipe implements PipeTransform {
 
   transform(value: string) {
-    return value[0].toUpperCase();
+    if (value) {
+      return value[0].toUpperCase();
+    }
+
+    return value;
   }
 }

@@ -1,1 +1,40 @@
-<p>transaction-form works!</p>
+<div class="container">
+  <h1>New Transaction</h1>
+
+  <form [formGroup]="form">
+    <div *ngFor="let field of formModel">
+      <!-- Input field -->
+      <mat-form-field class="full-width" *ngIf="field.elementType === 'input'">
+        <mat-label>{{ field.displayName }}</mat-label>
+
+        <input [formControlName]="field.fieldName" type="text" matInput
+          [placeholder]="field.displayName">
+
+        <!-- <mat-error *ngIf="this.form.controls[field.fieldName].touched && this.form.controls[field.fieldName].invalid">
+          <span>{{ getFieldError() }}</span>
+        </mat-error> -->
+      </mat-form-field>
+
+      <!-- Text area -->
+      <mat-form-field class="full-width"
+        *ngIf="field.elementType === 'textarea'">
+
+        <mat-label>{{ field.displayName }}</mat-label>
+        <textarea matInput [formControlName]="field.fieldName"
+          [placeholder]="field.displayName"></textarea>
+      </mat-form-field>
+
+      <!-- Select field -->
+      <mat-form-field class="full-width" *ngIf="field.elementType === 'select'">
+        <mat-label>{{ field.displayName }}</mat-label>
+
+        <mat-select>
+          <mat-option [value]="option.value"
+            *ngFor="let option of field.options">
+            {{ option.text }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </form>
+</div>

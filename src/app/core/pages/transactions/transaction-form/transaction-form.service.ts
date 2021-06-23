@@ -30,7 +30,15 @@ export class TransactionFormService {
   getTransactionFormModel(): TransactionFormField[] {
     return [
       {
+        fieldName: 'contactId',
+        displayName: 'Contact',
+        elementType: 'select',
+        options: [],
+        isRequired: true,
+      },
+      {
         fieldName: 'type',
+        displayName: 'Transaction type',
         elementType: 'select',
         options: [
           { text: 'Owes you', value: TransactionTypeCode.OWES_YOU },
@@ -40,20 +48,24 @@ export class TransactionFormService {
       },
       {
         fieldName: 'amount',
+        displayName: 'Amount',
         elementType: 'input',
         isRequired: true, 
       },
       {
         fieldName: 'dateTime',
+        displayName: 'Date & Time',
         elementType: 'dateTimePicker',
         isRequired: true,
       },
       {
         fieldName: 'note',
+        displayName: 'Note',
         elementType: 'textarea',
       },
       {
         fieldName: 'description',
+        displayName: 'Description',
         elementType: 'textarea'
       }
     ];

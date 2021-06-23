@@ -36,6 +36,7 @@ export interface CreateOrUpdateTransactionData {
 
 export interface TransactionFormField {
   fieldName: string;
+  displayName: string;
   elementType: 'select' | 'input' | 'textarea' | 'dateTimePicker',
   options?: Array<{ text: string; value: any; }>;
   isRequired?: boolean;
