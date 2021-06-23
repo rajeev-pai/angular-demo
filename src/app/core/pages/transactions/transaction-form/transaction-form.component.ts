@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { FormBuilder, Validators, ValidatorFn } from '@angular/forms';
 
 import { TransactionTypeCode } from '../../../../helpers/types';
 
@@ -17,7 +16,7 @@ interface TxnFormField {
 })
 export class TransactionFormComponent {
 
-  private txnFormFields: TxnFormField[] = [
+  private formModel: TxnFormField[] = [
     {
       fieldName: 'type',
       elementType: 'select',
@@ -47,36 +46,5 @@ export class TransactionFormComponent {
     }
   ];
 
-  transactionForm = this.getForm();
-
-  constructor(
-    private fb: FormBuilder,
-  ) { }
-
-  private getForm() {
-    const formConfig: { [key: string]: any; } = {};
-
-    for (let field of this.txnFormFields) {
-      const controlConfig: any[] = [];
-      const validators: ValidatorFn[] = [];
-
-      if (field.elementType === 'dateTimePicker') {
-        controlConfig.push(Date.now());
-      } else {
-        controlConfig.push('');
-      }
-
-      if (field.isRequired) {
-        validators.push(Validators.required);
-      }
-
-      if (validators.length > 0) {
-        controlConfig.push(validators);
-      }
-
-      formConfig[field.fieldName] = controlConfig;
-    }
-
-    return this.fb.group(formConfig);
-  }
+  constructor() { }
 }
