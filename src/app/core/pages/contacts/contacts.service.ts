@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { BehaviorSubject } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
 import {
@@ -20,8 +21,12 @@ import { AuthService } from '../../../auth/auth.service';
 })
 export class ContactsService {
 
-  private contacts: ContactData[] = [];
+  private subject = new BehaviorSubject<ContactData[]>([]);
+  // private contacts: ContactData[] = [];
+
   private contactIdsBeingFetched: number[] = [];
+
+  contacts$ = this.subject.asObservable();
 
   constructor(
     private http: HttpClient,
@@ -31,7 +36,8 @@ export class ContactsService {
     // Listen to logout events.
     this.authService.logout$
       .subscribe(_ => {
-        this.contacts = [];
+        // this.contacts = [];
+        this.subject.next([]);
       });
   }
 
@@ -58,7 +64,8 @@ export class ContactsService {
   }
 
   getContactById(id: number): ContactData | undefined {
-    const contact = this.contacts.find(c => c.id === id);
+    // const contact = this.contacts.find(c => c.id === id);
+    const contact = this.subject.getValue().find(c => c.id === id);
 
     if (!contact) {
       if (this.contactIdsBeingFetched.indexOf(id) === -1) {
@@ -83,13 +90,22 @@ export class ContactsService {
   }
 
   private updateContactList(contact: ContactData) {
-    const indexOfContact = this.contacts.findIndex(c => c.id === contact.id);
+    const contacts = this.subject.getValue();
+    // const indexOfContact = this.contacts.findIndex(c => c.id === contact.id);
+    const indexOfContact = contacts.findIndex(c => c.id === contact.id);
+
+    const copyOfContacts = [...contacts];
 
     // Update the contact in the list.
     if (indexOfContact === -1) {
-      this.contacts.push(contact);
+      // this.contacts.push(contact);
+      copyOfContacts.push(contact);
     } else {
-      this.contacts[indexOfContact] = contact;
+      // this.contacts[indexOfContact] = contact;
+      copyOfContacts[indexOfContact] = {
+        ...copyOfContacts[indexOfContact],
+        ...contact,
+      };
     }
 
     const indexOfIdBeingFetched = this.contactIdsBeingFetched
@@ -98,13 +114,21 @@ export class ContactsService {
     if (indexOfIdBeingFetched !== -1) {
       this.contactIdsBeingFetched.splice(indexOfIdBeingFetched, 1);
     }
+
+    this.subject.next(copyOfContacts);
   }
 
   private removeContactFromList(id: number) {
-    const index = this.contacts.findIndex(c => c.id === id);
+    const contacts = this.subject.getValue();
+    // const index = this.contacts.findIndex(c => c.id === id);
+    const index = contacts.findIndex(c => c.id === id);
 
     if (index !== -1) {
-      this.contacts.splice(index, 1);
+      const copyOfContacts = [...contacts];
+      // this.contacts.splice(index, 1);
+      copyOfContacts.splice(index, 1);
+
+      this.subject.next(copyOfContacts);
     }
   }
 }
