@@ -51,6 +51,7 @@ export class TransactionFormService {
         fieldName: 'amount',
         displayName: 'Amount',
         elementType: 'input',
+        inputType: 'number',
         isRequired: true, 
       },
       {

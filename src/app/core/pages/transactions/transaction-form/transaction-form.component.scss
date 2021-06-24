@@ -1,0 +1,17 @@
+.container {
+  .field_with_error {
+    margin-bottom: 8px;
+  }
+
+  .buttons {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 16px;
+
+    button {
+      &:not(:last-child) {
+        margin-right: 16px;
+      }
+    }
+  }
+}

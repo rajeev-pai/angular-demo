@@ -43,6 +43,7 @@ export interface TransactionFormField {
   fieldName: string;
   displayName: string;
   elementType: 'select' | 'input' | 'textarea' | 'dateTimePicker',
+  inputType?: 'text' | 'number' | 'email' | 'password';
   options?: TransactionFormOption[];
   shouldFetchOptions?: boolean;
   isRequired?: boolean;

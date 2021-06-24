@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { tap, map } from 'rxjs/operators';
 
 import {
   GET_CONTACTS,
@@ -12,6 +12,7 @@ import {
 import {
   ContactData,
   FetchContactsResponse,
+  TransactionFormOption,
 } from '../../../helpers/types';
 
 import { AuthService } from '../../../auth/auth.service';
@@ -22,8 +23,6 @@ import { AuthService } from '../../../auth/auth.service';
 export class ContactsService {
 
   private subject = new BehaviorSubject<ContactData[]>([]);
-  // private contacts: ContactData[] = [];
-
   private contactIdsBeingFetched: number[] = [];
 
   contacts$ = this.subject.asObservable();
@@ -33,10 +32,9 @@ export class ContactsService {
     private authService: AuthService,
   ) {
 
-    // Listen to logout events.
+    // Listen to logout event.
     this.authService.logout$
       .subscribe(_ => {
-        // this.contacts = [];
         this.subject.next([]);
       });
   }
@@ -46,9 +44,7 @@ export class ContactsService {
       .get<FetchContactsResponse>(GET_CONTACTS)
       .pipe(
         tap(res => {
-          for (const contact of res.contacts) {
-            this.updateContactList(contact);
-          }
+          this.updateContactsInStore(res.contacts);
         }),
       );
   }
@@ -58,13 +54,12 @@ export class ContactsService {
       .get<ContactData>(`${GET_CONTACT}/${id}`)
       .pipe(
         tap(contact => {
-          this.updateContactList(contact);
+          this.updateContactInStore(contact);
         }),
       );
   }
 
   getContactById(id: number): ContactData | undefined {
-    // const contact = this.contacts.find(c => c.id === id);
     const contact = this.subject.getValue().find(c => c.id === id);
 
     if (!contact) {
@@ -83,25 +78,60 @@ export class ContactsService {
       .pipe(
         tap(res => {
           if (res.success) {
-            this.removeContactFromList(id);
+            this.removeContactFromStore(id);
           }
         }),
       );
   }
 
-  private updateContactList(contact: ContactData) {
-    const contacts = this.subject.getValue();
-    // const indexOfContact = this.contacts.findIndex(c => c.id === contact.id);
-    const indexOfContact = contacts.findIndex(c => c.id === contact.id);
+  getContactOptions() {
+    return this.contacts$
+      .pipe(
+        map(contacts => {
+          const formattedContacts: TransactionFormOption[] = [];
 
-    const copyOfContacts = [...contacts];
+          for (let contact of contacts) {
+            formattedContacts.push({
+              text: `${contact.firstName} ${contact.lastName}`,
+              value: contact.id,
+            });
+          }
+
+          return formattedContacts;
+        }),
+      );
+  }
+
+  private updateContactsInStore(contacts: ContactData[]) {
+    const copyOfContacts = [...this.subject.getValue()];
+
+    for (let contact of contacts) {
+      const index = copyOfContacts.findIndex(c => {
+        return c.id === contact.id;
+      });
+
+      // Update the contact in the list.
+      if (index === -1) {
+        copyOfContacts.push(contact);
+      } else {
+        copyOfContacts[index] = {
+          ...copyOfContacts[index],
+          ...contact,
+        };
+      }
+    }
+
+    this.subject.next(copyOfContacts);
+  }
+
+  private updateContactInStore(contact: ContactData) {
+    const copyOfContacts = [...this.subject.getValue()];
+    const indexOfContact = copyOfContacts.findIndex(c => c.id === contact.id);
 
     // Update the contact in the list.
     if (indexOfContact === -1) {
-      // this.contacts.push(contact);
       copyOfContacts.push(contact);
     } else {
-      // this.contacts[indexOfContact] = contact;
       copyOfContacts[indexOfContact] = {
         ...copyOfContacts[indexOfContact],
         ...contact,
@@ -118,14 +148,12 @@ export class ContactsService {
     this.subject.next(copyOfContacts);
   }
 
-  private removeContactFromList(id: number) {
+  private removeContactFromStore(id: number) {
     const contacts = this.subject.getValue();
-    // const index = this.contacts.findIndex(c => c.id === id);
     const index = contacts.findIndex(c => c.id === id);
 
     if (index !== -1) {
       const copyOfContacts = [...contacts];
-      // this.contacts.splice(index, 1);
       copyOfContacts.splice(index, 1);
 
       this.subject.next(copyOfContacts);

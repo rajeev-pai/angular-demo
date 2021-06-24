@@ -8,7 +8,6 @@ import { ContactViewComponent } from './pages/contacts/contact-view/contact-view
 import { TransactionsComponent } from './pages/transactions/transactions.component';
 import { CorePageGuard } from './core-page.guard';
 import { SettingsComponent } from './pages/settings/settings.component';
-import { TransactionFormComponent } from './pages/transactions/transaction-form/transaction-form.component';
 
 const routes: Route[] = [
   {
@@ -35,10 +34,6 @@ const routes: Route[] = [
       {
         path: 'transactions',
         component: TransactionsComponent,
-      },
-      {
-        path: 'new-transaction',
-        component: TransactionFormComponent,
       },
       {
         path: 'settings',
