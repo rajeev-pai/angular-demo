@@ -1,5 +1,5 @@
 <div class="container">
-  <h2>New Transaction</h2>
+  <h2>{{ title }}</h2>
 
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <div *ngFor="let field of formModel">
@@ -69,7 +69,9 @@
 
     <div class="buttons">
       <button type="button" mat-button (click)="onClose()">Close</button>
-      <button type="submit" mat-raised-button color="accent">Add</button>
+      <button type="submit" mat-raised-button color="accent">
+        {{ submitButtonText }}
+      </button>
     </div>
   </form>
 </div>

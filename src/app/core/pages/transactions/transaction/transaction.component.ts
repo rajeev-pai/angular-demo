@@ -5,17 +5,17 @@ import {
   EventEmitter,
   OnInit,
 } from '@angular/core';
-// import { Observable } from 'rxjs';
-// import { shareReplay, map } from 'rxjs/operators';
+
+import { MatDialog } from '@angular/material/dialog';
 
 import {
   Transaction,
   TransactionTypeCode,
   CrudPressEvents,
-  // ContactData,
 } from '../../../../helpers/types';
 
 import { ContactsService } from '../../contacts/contacts.service';
+import { TransactionFormComponent } from '../transaction-form/transaction-form.component';
 
 @Component({
   selector: 'mm-transaction',
@@ -30,20 +30,13 @@ export class TransactionComponent implements OnInit {
 
   @Output('refresh') refreshList = new EventEmitter();
 
-  // private fetchContactHttp$!: Observable<ContactData>;
-
   constructor(
     private contactsService: ContactsService,
+    private matDialog: MatDialog,
   ) { }
 
   ngOnInit() {
-    // this.fetchContactHttp$ = (
-    //   this.contactsService
-    //     .fetchContactById(this.txn.contactId)
-    //     .pipe(
-    //       shareReplay(),
-    //     )
-    // );
+
   }
 
   get owesYou(): boolean {
@@ -75,11 +68,6 @@ export class TransactionComponent implements OnInit {
   }
 
   getContactName() {
-    // return this.fetchContactHttp$
-    //   .pipe(
-    //     map(contact => `${contact.firstName} ${contact.lastName}`),
-    //   );
-
     const contact = this.contactsService.getContactById(this.txn.contactId);
     return contact ? `${contact.firstName} ${contact.lastName}` : 'Loading...';
   }
@@ -105,7 +93,16 @@ export class TransactionComponent implements OnInit {
   }
 
   prepareToEditTransaction() {
-
+    this.matDialog.open(TransactionFormComponent, {
+      width: '500px',
+      data: {
+        mode: 'edit',
+        transaction: this.txn,
+        afterCreate: () => {
+          this.refreshList.emit();
+        }
+      }
+    });
   }
 
   askDeleteConfirmation() {

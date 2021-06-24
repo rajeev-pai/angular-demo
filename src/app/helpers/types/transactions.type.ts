@@ -14,6 +14,7 @@ export interface Transaction {
   description: string;
   createdAt: number;
   updatedAt: number;
+  [key: string]: any;
 }
 
 export interface TransactionsResponse {

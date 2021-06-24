@@ -22,10 +22,12 @@ import { ContactsService } from '../../contacts/contacts.service';
 import {
   TransactionFormField,
   CreateOrUpdateTransactionData,
+  Transaction,
 } from '../../../../helpers/types';
 
 interface ModalData {
   mode: 'create' | 'edit' | 'view';
+  transaction?: Transaction,
   afterCreate?: () => void;
 }
 
@@ -37,6 +39,8 @@ export class TransactionFormComponent implements OnInit, OnDestroy {
 
   formModel: TransactionFormField[] = [];
   form!: FormGroup;
+  title = 'New Transaction';
+  submitButtonText = 'Save';
 
   private contactSubscription!: Subscription;
 
@@ -123,15 +127,31 @@ export class TransactionFormComponent implements OnInit, OnDestroy {
       dateTime: new Date(dateTime).getTime()
     };
 
-    this.txnFormService
-      .createNewTransaction(submitData)
-      .subscribe(_ => {
-        if (this.data.afterCreate) {
-          this.data.afterCreate();
-        }
+    switch (this.data.mode) {
+      case 'create':
+        this.txnFormService
+          .createNewTransaction(submitData)
+          .subscribe(_ => {
+            if (this.data.afterCreate) {
+              this.data.afterCreate();
+            }
 
-        this.dialogRef.close();
-      });
+            this.dialogRef.close();
+          });
+        break;
+
+      case 'edit':
+        this.txnFormService
+          .updateTransaction(this.data.transaction!.id, submitData)
+          .subscribe(_ => {
+            if (this.data.afterCreate) {
+              this.data.afterCreate();
+            }
+
+            this.dialogRef.close();
+          });
+        break;
+    }
   }
 
   private createForm() {
@@ -165,6 +185,21 @@ export class TransactionFormComponent implements OnInit, OnDestroy {
         default:
           formControl.push('');
           break;
+      }
+
+      if (
+        (this.data.mode === 'edit')
+        && this.data.transaction
+      ) {
+        this.title = 'Edit transaction';
+        this.submitButtonText = 'Update';
+        const fieldData = this.data.transaction[field.fieldName];
+
+        if (field.elementType === 'dateTimePicker') {
+          formControl[0] = new Date(fieldData).toISOString();
+        } else {
+          formControl[0] = fieldData;
+        }
       }
 
       const synchronousValidators: ValidatorFn[] = [];
