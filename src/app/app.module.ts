@@ -6,7 +6,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 
 import { AppComponent } from './app.component';
-import { AuthModule } from './auth/auth.module';
+// import { AuthModule } from './auth/auth.module';
 import { CoreModule } from './core/core.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AuthHeaderInterceptor } from './utils/interceptors/auth-header.interceptor';
@@ -18,7 +18,7 @@ import { AuthHeaderInterceptor } from './utils/interceptors/auth-header.intercep
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    AuthModule,
+    // AuthModule,
     CoreModule,
     AppRoutingModule,
     HttpClientModule,
