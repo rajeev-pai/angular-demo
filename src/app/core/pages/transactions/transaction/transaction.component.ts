@@ -3,10 +3,9 @@ import {
   Input,
   Output,
   EventEmitter,
-  OnInit,
 } from '@angular/core';
 
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 
 import {
   Transaction,
@@ -15,14 +14,16 @@ import {
 } from '../../../../helpers/types';
 
 import { ContactsService } from '../../contacts/contacts.service';
+import { TransactionsService } from '../transactions.service';
 import { TransactionFormComponent } from '../transaction-form/transaction-form.component';
+import { DeleteConfirmationModalComponent } from '../../../../shared/UI/delete-confirmation-modal/delete-confirmation-modal.component';
 
 @Component({
   selector: 'mm-transaction',
   templateUrl: './transaction.component.html',
   styleUrls: ['./transaction.component.scss']
 })
-export class TransactionComponent implements OnInit {
+export class TransactionComponent {
 
   @Input('transaction') txn!: Transaction;
   @Input('isLast') isLast!: boolean;
@@ -30,14 +31,13 @@ export class TransactionComponent implements OnInit {
 
   @Output('refresh') refreshList = new EventEmitter();
 
+  private deleteModalRef!: MatDialogRef<DeleteConfirmationModalComponent>;
+
   constructor(
     private contactsService: ContactsService,
     private matDialog: MatDialog,
+    private transactionsService: TransactionsService,
   ) { }
-
-  ngOnInit() {
-
-  }
 
   get owesYou(): boolean {
     return this.txn.type === TransactionTypeCode.OWES_YOU;
@@ -89,7 +89,13 @@ export class TransactionComponent implements OnInit {
   }
 
   viewTransaction() {
-
+    this.matDialog.open(TransactionFormComponent, {
+      width: '500px',
+      data: {
+        mode: 'view',
+        transaction: this.txn
+      }
+    });
   }
 
   prepareToEditTransaction() {
@@ -106,6 +112,24 @@ export class TransactionComponent implements OnInit {
   }
 
   askDeleteConfirmation() {
+    this.deleteModalRef = this.matDialog
+      .open(DeleteConfirmationModalComponent, {
+        data: {
+          title: 'Are you sure you want to delete this transaction?',
+          description: 'This action will permanently remove the transaction!',
+          deleteFunc: this.deleteTransaction
+        }
+      });
+  }
 
+  private deleteTransaction = () => {
+    this.transactionsService
+      .deleteTransaction(this.txn.id)
+      .subscribe(res => {
+        if (res.success) {
+          this.deleteModalRef.close();
+          this.refreshList.emit();
+        }
+      });
   }
 }
