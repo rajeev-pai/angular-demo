@@ -14,7 +14,7 @@ export interface Transaction {
   description: string;
   createdAt: number;
   updatedAt: number;
-  [key: string]: any;
+  // [key: string]: any;
 }
 
 export interface TransactionsResponse {
@@ -41,7 +41,7 @@ export interface TransactionFormOption {
 }
 
 export interface TransactionFormField {
-  fieldName: string;
+  fieldName: keyof Transaction;
   displayName: string;
   elementType: 'select' | 'input' | 'textarea' | 'dateTimePicker',
   inputType?: 'text' | 'number' | 'email' | 'password';
