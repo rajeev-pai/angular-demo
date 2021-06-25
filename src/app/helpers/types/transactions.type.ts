@@ -28,15 +28,15 @@ export interface TransactionSummary {
 
 export interface CreateOrUpdateTransactionData {
   contactId: number;
-	type: number;
-	amount: number;
-	dateTime: number;
-	note: string;
-	description: string;
+  type: number;
+  amount: number;
+  dateTime: number;
+  note: string;
+  description: string;
 }
 
 export interface TransactionFormOption {
-  text: string; 
+  text: string;
   value: any;
 }
 

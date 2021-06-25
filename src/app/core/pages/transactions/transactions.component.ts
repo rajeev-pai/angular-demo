@@ -16,6 +16,8 @@ export class TransactionsComponent implements OnInit, OnDestroy {
   transactions: Transaction[] = [];
   username = '';
   email = '';
+  youOwe = 0;
+  owesYou = 0;
 
   private subscription!: Subscription;
 
@@ -35,6 +37,7 @@ export class TransactionsComponent implements OnInit, OnDestroy {
       });
 
     this.fetchTransactions();
+    this.fetchTransactionSummary();
   }
 
   ngOnDestroy() {
@@ -49,6 +52,15 @@ export class TransactionsComponent implements OnInit, OnDestroy {
       });
   }
 
+  fetchTransactionSummary() {
+    this.transactionService
+      .fetchAccountTransactionSummary()
+      .subscribe(res => {
+        this.youOwe = res.youOwe;
+        this.owesYou = res.owesYou;
+      }); 
+  }
+
   onAddTransaction() {
     this.matDialog.open(TransactionFormComponent, {
       width: '500px',
@@ -61,5 +73,6 @@ export class TransactionsComponent implements OnInit, OnDestroy {
 
   refreshList = () => {
     this.fetchTransactions();
+    this.fetchTransactionSummary();
   }
 }

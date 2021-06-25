@@ -3,10 +3,10 @@
   [ngStyle]="{ 'border-color': isLast ? 'transparent' : '' }">
 
   <div class="contact_info">
-    <div class="name" *ngIf="!hideName">
-      <!-- {{ getContactName() | async }} -->
-      {{ getContactName() }}
-    </div>
+
+    <a class="name" *ngIf="!hideName"
+      [routerLink]="['/contact', txn.contactId]">{{ getContactName() }}</a>
+
     <div class="transaction_type">{{ transactionType }}</div>
   </div>
 

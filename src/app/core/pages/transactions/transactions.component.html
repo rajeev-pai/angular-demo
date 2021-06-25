@@ -3,26 +3,26 @@
     <div class="user_data">
       <div class="general_info">
         <img src="assets/images/contact.png" alt="">
-  
+
         <div class="general_info--inner_container">
           <div class="user_name">{{ username }}</div>
           <div class="email">{{ email }}</div>
         </div>
       </div>
-  
+
       <div class="transaction_info">
         <div class="you_owe">
           <span class="text">You owe: </span><span class="amount">{{
-            10000 | currency:'INR' }}</span>
+            youOwe | currency:'INR' }}</span>
         </div>
-  
+
         <div class="owes_you">
           <span class="text">Owes you: </span><span class="amount">{{
-            5000 | currency:'INR'
+            owesYou | currency:'INR'
             }}</span>
         </div>
       </div>
-  
+
       <div class="buttons">
         <button mat-fab color="accent" (click)="onAddTransaction()">
           <mat-icon>add</mat-icon>

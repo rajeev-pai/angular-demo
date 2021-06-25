@@ -13,18 +13,18 @@
     <div class="transaction_info">
       <div class="you_owe">
         <span class="text">You owe: </span><span class="amount">{{
-          contact.youOwe | currency:'INR' }}</span>
+          youOwe | currency:'INR' }}</span>
       </div>
 
       <div class="owes_you">
         <span class="text">Owes you: </span><span class="amount">{{
-          contact.owesYou | currency:'INR'
+          owesYou | currency:'INR'
           }}</span>
       </div>
     </div>
 
     <div class="buttons">
-      <button mat-fab color="accent">
+      <button mat-fab color="accent" (click)="onAddTransaction()">
         <mat-icon>add</mat-icon>
       </button>
     </div>
