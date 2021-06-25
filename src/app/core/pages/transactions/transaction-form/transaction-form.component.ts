@@ -27,7 +27,8 @@ import {
 
 interface ModalData {
   mode: 'create' | 'edit' | 'view';
-  transaction?: Transaction,
+  transaction?: Transaction;
+  contactId?: number;
   afterCreate?: () => void;
 }
 
@@ -100,6 +101,18 @@ export class TransactionFormComponent implements OnInit, OnDestroy {
     return null;
   }
 
+  // shouldDisableField(controlName: string): boolean {
+  //   if (this.data.mode === 'view') {
+  //     return true;
+  //   }
+
+  //   if ((controlName === 'contactId') && this.data.contactId) {
+  //     return true;
+  //   }
+
+  //   return false;
+  // }
+
   onClose() {
     this.dialogRef.close();
   }
@@ -158,21 +171,30 @@ export class TransactionFormComponent implements OnInit, OnDestroy {
     const formControls: { [key: string]: any; } = {};
 
     for (const field of this.formModel) {
-      const formControl = [];
+      // const formControl = [];
+      ['', [], []]
+      let initialValue: any = '';
 
       switch (field.elementType) {
         case 'dateTimePicker':
-          const currentDate = new Date().toISOString();
-          formControl.push(currentDate);
+          // const currentDate = new Date().toISOString();
+          // formControl.push(currentDate);
+          initialValue = new Date().toISOString();
           break;
 
         case 'select':
+          initialValue = null;
+
           if (field.options && (field.options.length > 0)) {
             // Make the first option the default choice.
-            formControl.push(field.options[0].value)
-          } else {
-            formControl.push(null);
+            initialValue = field.options[0].value;
           }
+
+          if ((field.fieldName === 'contactId') && this.data.contactId) {
+            initialValue = this.data.contactId;
+          }
+
+          // formControl.push(initialValue);
 
           if (field.shouldFetchOptions) {
             if (field.fieldName === 'contactId') {
@@ -183,22 +205,31 @@ export class TransactionFormComponent implements OnInit, OnDestroy {
           break;
 
         default:
-          formControl.push('');
+          // formControl.push('');
+          initialValue = '';
           break;
       }
 
-      if (
-        (this.data.mode === 'edit')
-        && this.data.transaction
-      ) {
-        this.title = 'Edit transaction';
-        this.submitButtonText = 'Update';
+      if (this.data.transaction) {
+        switch (this.data.mode) {
+          case 'edit':
+            this.title = 'Edit transaction';
+            this.submitButtonText = 'Update';
+            break;
+
+          case 'view':
+            this.title = 'View transaction';
+            break;
+        }
+
         const fieldData = this.data.transaction[field.fieldName];
 
         if (field.elementType === 'dateTimePicker') {
-          formControl[0] = new Date(fieldData).toISOString();
+          // formControl[0] = new Date(fieldData).toISOString();
+          initialValue = new Date(fieldData).toISOString();
         } else {
-          formControl[0] = fieldData;
+          // formControl[0] = fieldData;
+          initialValue = fieldData;
         }
       }
 
@@ -208,8 +239,31 @@ export class TransactionFormComponent implements OnInit, OnDestroy {
         synchronousValidators.push(Validators.required);
       }
 
-      formControl.push(synchronousValidators);
-      formControls[field.fieldName] = formControl;
+      let isDisabled = false;
+
+      if (this.data.mode === 'view') {
+        isDisabled = true;
+      }
+
+      if ((field.fieldName === 'contactId') && this.data.contactId) {
+        isDisabled = true;
+      }
+
+      // formControl.push(synchronousValidators);
+      formControls[field.fieldName] = [
+        {
+          value: initialValue,
+          disabled: isDisabled
+        },
+        synchronousValidators
+      ];
+      // formControls[field.fieldName] = this.fb.control(
+      //   {
+      //     value: initialValue,
+      //     disabled: isDisabled
+      //   },
+      //   synchronousValidators
+      // );
     }
 
     this.form = this.fb.group(formControls);

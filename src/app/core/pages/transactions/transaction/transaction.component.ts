@@ -104,6 +104,7 @@ export class TransactionComponent {
       data: {
         mode: 'edit',
         transaction: this.txn,
+        contactId: this.hideName ? this.txn.contactId : null,
         afterCreate: () => {
           this.refreshList.emit();
         }

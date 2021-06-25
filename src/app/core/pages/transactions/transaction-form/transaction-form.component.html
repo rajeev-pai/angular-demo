@@ -38,6 +38,7 @@
         <mat-label>{{ field.displayName }}</mat-label>
 
         <mat-select [formControlName]="field.fieldName">
+
           <mat-option [value]="option.value"
             *ngFor="let option of field.options">
             {{ option.text }}
@@ -69,7 +70,9 @@
 
     <div class="buttons">
       <button type="button" mat-button (click)="onClose()">Close</button>
-      <button type="submit" mat-raised-button color="accent">
+
+      <button type="submit" mat-raised-button color="accent"
+        *ngIf="data.mode !== 'view'">
         {{ submitButtonText }}
       </button>
     </div>
