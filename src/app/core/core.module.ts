@@ -25,7 +25,7 @@ import {
 // import { ContactComponent } from './pages/contacts/contact/contact.component';
 // import { ContactFormComponent } from './pages/contacts/contact-form/contact-form.component';
 import { TransactionsComponent } from './pages/transactions/transactions.component';
-import { TransactionComponent } from './pages/transactions/transaction/transaction.component';
+// import { TransactionComponent } from './pages/transactions/transaction/transaction.component';
 import { TransactionFormComponent } from './pages/transactions/transaction-form/transaction-form.component';
 import { CoreRoutingModule } from './core-routing.module';
 import { SharedModule } from '../shared/shared.module';
@@ -53,7 +53,7 @@ import { SettingsComponent } from './pages/settings/settings.component';
     // ContactComponent,
     // ContactFormComponent,
     TransactionsComponent,
-    TransactionComponent,
+    // TransactionComponent,
     TransactionFormComponent,
     ContactViewComponent,
     SettingsComponent,
