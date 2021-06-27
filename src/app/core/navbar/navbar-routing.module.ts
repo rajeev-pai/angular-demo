@@ -16,6 +16,20 @@ const routes: Route[] = [
         }
       },
       {
+        path: 'new-contact',
+        loadChildren: async () => {
+          const m = await import('../pages/contacts/contact-form/contact-form.module');
+          return m.ContactFormModule;
+        }
+      },
+      {
+        path: 'edit-contact/:id',
+        loadChildren: async () => {
+          const m = await import('../pages/contacts/contact-form/contact-form.module');
+          return m.ContactFormModule;
+        }
+      },
+      {
         path: '',
         redirectTo: 'contacts',
         pathMatch: 'full'
