@@ -37,6 +37,13 @@ const routes: Route[] = [
         }
       },
       {
+        path: 'transactions',
+        loadChildren: async () => {
+          const m = await import('../pages/transactions/transactions.module');
+          return m.TransactionsModule;
+        }
+      },
+      {
         path: '',
         redirectTo: 'contacts',
         pathMatch: 'full'

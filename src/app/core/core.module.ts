@@ -24,7 +24,7 @@ import {
 // import { NavbarComponent } from './navbar/navbar.component';
 // import { ContactComponent } from './pages/contacts/contact/contact.component';
 // import { ContactFormComponent } from './pages/contacts/contact-form/contact-form.component';
-import { TransactionsComponent } from './pages/transactions/transactions.component';
+// import { TransactionsComponent } from './pages/transactions/transactions.component';
 // import { TransactionComponent } from './pages/transactions/transaction/transaction.component';
 import { TransactionFormComponent } from './pages/transactions/transaction-form/transaction-form.component';
 import { CoreRoutingModule } from './core-routing.module';
@@ -52,7 +52,7 @@ import { SettingsComponent } from './pages/settings/settings.component';
     // ContactsComponent,
     // ContactComponent,
     // ContactFormComponent,
-    TransactionsComponent,
+    // TransactionsComponent,
     // TransactionComponent,
     TransactionFormComponent,
     // ContactViewComponent,
