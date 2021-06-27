@@ -8,6 +8,7 @@ import { TransactionsComponent } from './transactions.component';
 import { TransactionsRoutingModule } from './transactions-routing.module';
 import { SharedModule } from '../../../shared/shared.module';
 import { TransactionModule } from './transaction/transaction.module';
+import { TransactionFormModule } from './transaction-form/transaction-form.module';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { TransactionModule } from './transaction/transaction.module';
     MatIconModule,
     MatButtonModule,
     TransactionModule,
+    TransactionFormModule,
   ]
 })
 export class TransactionsModule { }

@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 
 import { TransactionComponent } from './transaction.component';
 import { SharedModule } from '../../../../shared/shared.module';
+import { TransactionFormModule } from '../transaction-form/transaction-form.module';
 
 @NgModule({
   declarations: [
@@ -13,6 +14,7 @@ import { SharedModule } from '../../../../shared/shared.module';
     CommonModule,
     RouterModule,
     SharedModule,
+    TransactionFormModule,
   ],
   exports: [
     TransactionComponent,
