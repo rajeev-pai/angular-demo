@@ -12,39 +12,43 @@ import { SettingsComponent } from './pages/settings/settings.component';
 const routes: Route[] = [
   {
     path: '',
-    component: NavbarComponent,
+    // component: NavbarComponent,
+    loadChildren: async () => {
+      const m = await import('./navbar/navbar.module');
+      return m.NavbarModule;
+    },
     canActivate: [CorePageGuard],
-    children: [
-      {
-        path: 'contacts',
-        component: ContactsComponent
-      },
-      {
-        path: 'contact/:id',
-        component: ContactViewComponent,
-      },
-      {
-        path: 'new-contact',
-        component: ContactFormComponent,
-      },
-      {
-        path: 'edit-contact/:id',
-        component: ContactFormComponent,
-      },
-      {
-        path: 'transactions',
-        component: TransactionsComponent,
-      },
-      {
-        path: 'settings',
-        component: SettingsComponent,
-      },
-      {
-        path: '',
-        redirectTo: 'contacts',
-        pathMatch: 'full'
-      }
-    ],
+    // children: [
+    //   {
+    //     path: 'contacts',
+    //     component: ContactsComponent
+    //   },
+    //   {
+    //     path: 'contact/:id',
+    //     component: ContactViewComponent,
+    //   },
+    //   {
+    //     path: 'new-contact',
+    //     component: ContactFormComponent,
+    //   },
+    //   {
+    //     path: 'edit-contact/:id',
+    //     component: ContactFormComponent,
+    //   },
+    //   {
+    //     path: 'transactions',
+    //     component: TransactionsComponent,
+    //   },
+    //   {
+    //     path: 'settings',
+    //     component: SettingsComponent,
+    //   },
+    //   {
+    //     path: '',
+    //     redirectTo: 'contacts',
+    //     pathMatch: 'full'
+    //   }
+    // ],
   },
 ];
 
