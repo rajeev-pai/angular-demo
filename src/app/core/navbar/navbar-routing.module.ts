@@ -44,6 +44,13 @@ const routes: Route[] = [
         }
       },
       {
+        path: 'settings',
+        loadChildren: async () => {
+          const m = await import('../pages/settings/settings.module');
+          return m.SettingsModule;
+        }
+      },
+      {
         path: '',
         redirectTo: 'contacts',
         pathMatch: 'full'

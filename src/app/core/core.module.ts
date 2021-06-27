@@ -30,7 +30,7 @@ import {
 import { CoreRoutingModule } from './core-routing.module';
 import { SharedModule } from '../shared/shared.module';
 // import { ContactViewComponent } from './pages/contacts/contact-view/contact-view.component';
-import { SettingsComponent } from './pages/settings/settings.component';
+// import { SettingsComponent } from './pages/settings/settings.component';
 
 
 // If using Moment
@@ -56,7 +56,7 @@ import { SettingsComponent } from './pages/settings/settings.component';
     // TransactionComponent,
     // TransactionFormComponent,
     // ContactViewComponent,
-    SettingsComponent,
+    // SettingsComponent,
   ],
   imports: [
     MatToolbarModule,
