@@ -29,7 +29,7 @@ import { TransactionsComponent } from './pages/transactions/transactions.compone
 import { TransactionFormComponent } from './pages/transactions/transaction-form/transaction-form.component';
 import { CoreRoutingModule } from './core-routing.module';
 import { SharedModule } from '../shared/shared.module';
-import { ContactViewComponent } from './pages/contacts/contact-view/contact-view.component';
+// import { ContactViewComponent } from './pages/contacts/contact-view/contact-view.component';
 import { SettingsComponent } from './pages/settings/settings.component';
 
 
@@ -55,7 +55,7 @@ import { SettingsComponent } from './pages/settings/settings.component';
     TransactionsComponent,
     // TransactionComponent,
     TransactionFormComponent,
-    ContactViewComponent,
+    // ContactViewComponent,
     SettingsComponent,
   ],
   imports: [

@@ -16,6 +16,13 @@ const routes: Route[] = [
         }
       },
       {
+        path: 'contact/:id',
+        loadChildren: async () => {
+          const m = await import('../pages/contacts/contact-view/contact-view.module');
+          return m.ContactViewModule;
+        }
+      },
+      {
         path: 'new-contact',
         loadChildren: async () => {
           const m = await import('../pages/contacts/contact-form/contact-form.module');
