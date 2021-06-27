@@ -7,6 +7,20 @@ const routes: Route[] = [
   {
     path: '',
     component: NavbarComponent,
+    children: [
+      {
+        path: 'contacts',
+        loadChildren: async () => {
+          const m = await import('../pages/contacts/contacts.module');
+          return m.ContactsModule;
+        }
+      },
+      {
+        path: '',
+        redirectTo: 'contacts',
+        pathMatch: 'full'
+      }
+    ],
   }
 ];
 
