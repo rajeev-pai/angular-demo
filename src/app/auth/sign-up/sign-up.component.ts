@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 import { AuthService } from '../auth.service';
+import { FormCanDeactivate } from '../../utils/guards/form-alert/form-can-deactivate';
 import {
   PasswordValidators,
   StrongPasswordErrors,
@@ -23,7 +24,7 @@ import {
   templateUrl: './sign-up.component.html',
   styleUrls: ['./sign-up.component.scss']
 })
-export class SignUpComponent implements OnInit, OnDestroy {
+export class SignUpComponent extends FormCanDeactivate implements OnInit, OnDestroy {
   showPassword = false;
   showConfirmPassword = false;
   signUpInProgress = false;
@@ -58,7 +59,9 @@ export class SignUpComponent implements OnInit, OnDestroy {
   constructor(
     private authService: AuthService,
     private router: Router,
-  ) { }
+  ) {
+    super();
+  }
 
   ngOnInit() {
     // Listen to changes from the password input field.
@@ -76,6 +79,10 @@ export class SignUpComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.passwordSubscription.unsubscribe();
+  }
+
+  get formRef() {
+    return this.signUpForm;
   }
 
   get email() {

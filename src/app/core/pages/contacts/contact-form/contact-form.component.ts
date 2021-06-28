@@ -1,17 +1,18 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { AbstractControl, NgForm } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { ContactFormService } from './contact-form.service';
 import { ContactsService } from '../contacts.service';
 import { UpdateContactData } from '../../../../helpers/types';
+import { FormCanDeactivate } from '../../../../utils/guards/form-alert/form-can-deactivate';
 
 @Component({
   selector: 'app-contact-form',
   templateUrl: './contact-form.component.html',
   styleUrls: ['./contact-form.component.scss']
 })
-export class ContactFormComponent implements OnInit {
+export class ContactFormComponent extends FormCanDeactivate implements OnInit {
 
   title = 'New Contact';
   buttonTitle = 'Create';
@@ -25,7 +26,13 @@ export class ContactFormComponent implements OnInit {
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private contactsService: ContactsService,
-  ) { }
+  ) {
+    super();
+  }
+
+  get formRef() {
+    return this.form;
+  }
 
   ngOnInit() {
     this.activatedRoute.params
@@ -53,6 +60,7 @@ export class ContactFormComponent implements OnInit {
       this.contactFormService
         .createContact(this.form.value)
         .subscribe(res => {
+          this.form.reset();
           this.router.navigateByUrl('/contacts');
         });
     } else {
@@ -64,6 +72,7 @@ export class ContactFormComponent implements OnInit {
       this.contactFormService
         .updateContact(updateData)
         .subscribe(res => {
+          this.form.reset();
           this.router.navigateByUrl('/contacts');
         });
     }

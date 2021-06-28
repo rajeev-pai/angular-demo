@@ -19,6 +19,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 import { TransactionFormService } from './transaction-form.service';
 import { ContactsService } from '../../contacts/contacts.service';
+import { FormCanDeactivate } from '../../../../utils/guards/form-alert/form-can-deactivate';
 import {
   TransactionFormField,
   CreateOrUpdateTransactionData,
@@ -36,7 +37,7 @@ interface ModalData {
   templateUrl: './transaction-form.component.html',
   styleUrls: ['./transaction-form.component.scss']
 })
-export class TransactionFormComponent implements OnInit, OnDestroy {
+export class TransactionFormComponent extends FormCanDeactivate implements OnInit, OnDestroy {
 
   formModel: TransactionFormField[] = [];
   form!: FormGroup;
@@ -51,9 +52,16 @@ export class TransactionFormComponent implements OnInit, OnDestroy {
     private contactsService: ContactsService,
     @Inject(MAT_DIALOG_DATA) public data: ModalData,
     private dialogRef: MatDialogRef<TransactionFormComponent>,
-  ) { }
+  ) {
+    super();
+  }
+
+  get formRef() {
+    return this.form;
+  }
 
   ngOnInit() {
+    this.dialogRef.disableClose = true;
     this.formModel = this.txnFormService.getTransactionFormModel();
     this.createForm();
 
@@ -114,7 +122,14 @@ export class TransactionFormComponent implements OnInit, OnDestroy {
   // }
 
   onClose() {
-    this.dialogRef.close();
+    if (this.canDeactivate()) {
+      this.dialogRef.close();
+      return;
+    }
+
+    if (confirm('You have unsaved changes! Are you sure you want to close this modal?')) {
+      this.dialogRef.close();
+    }
   }
 
   onSubmit() {
