@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { Route, RouterModule } from '@angular/router';
+import { Route, RouterModule, PreloadAllModules } from '@angular/router';
 
 // import { LoginComponent } from './auth/login/login.component';
 // import { SignUpComponent } from './auth/sign-up/sign-up.component';
@@ -59,7 +59,9 @@ const routes: Route[] = [
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes),
+    RouterModule.forRoot(routes, {
+      preloadingStrategy: PreloadAllModules,
+    }),
   ],
   exports: [
     RouterModule,
