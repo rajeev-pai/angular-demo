@@ -10,6 +10,7 @@ import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AuthHeaderInterceptor } from './utils/interceptors/auth-header.interceptor';
+import { HttpDelayInterceptor } from './utils/interceptors/delay.interceptor';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,12 @@ import { AuthHeaderInterceptor } from './utils/interceptors/auth-header.intercep
       provide: HTTP_INTERCEPTORS, 
       useClass: AuthHeaderInterceptor, 
       multi: true,
-    }
+    },
+    // {
+    //   provide: HTTP_INTERCEPTORS,
+    //   useClass: HttpDelayInterceptor,
+    //   multi: true,
+    // }
   ],
   bootstrap: [AppComponent]
 })
