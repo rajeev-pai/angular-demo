@@ -4,6 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { CookieService } from 'ngx-cookie-service';
+import { NotifierModule } from 'angular-notifier';
 
 import { AppComponent } from './app.component';
 // import { AuthModule } from './auth/auth.module';
@@ -23,6 +24,7 @@ import { HttpDelayInterceptor } from './utils/interceptors/delay.interceptor';
     // CoreModule,
     AppRoutingModule,
     HttpClientModule,
+    NotifierModule,
   ],
   providers: [
     CookieService,
