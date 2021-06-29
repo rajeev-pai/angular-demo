@@ -69,10 +69,11 @@
     </div>
 
     <div class="buttons">
-      <button type="button" mat-button (click)="onClose()">Close</button>
+      <button type="button" mat-button (click)="onClose()"
+        [disabled]="disableButton">Close</button>
 
       <button type="submit" mat-raised-button color="accent"
-        *ngIf="data.mode !== 'view'">
+        *ngIf="data.mode !== 'view'" [disabled]="disableButton">
         {{ submitButtonText }}
       </button>
     </div>

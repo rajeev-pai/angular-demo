@@ -15,9 +15,9 @@ import { FormCanDeactivate } from '../../../../utils/guards/form-alert/form-can-
   styleUrls: ['./contact-form.component.scss']
 })
 export class ContactFormComponent extends FormCanDeactivate implements OnInit {
-
   title = 'New Contact';
   buttonTitle = 'Create';
+  disableButton = false;
 
   @ViewChild('contactForm') form!: NgForm;
 
@@ -60,9 +60,13 @@ export class ContactFormComponent extends FormCanDeactivate implements OnInit {
 
   onSubmitForm() {
     if (!this.contactId) {
+      this.disableButton = true;
+
       this.contactFormService
         .createContact(this.form.value)
         .subscribe(res => {
+          this.disableButton = false;
+
           this.notifierService.notify(
             'success',
             'Contact created successfully!'
@@ -76,10 +80,13 @@ export class ContactFormComponent extends FormCanDeactivate implements OnInit {
         ...this.form.value,
         id: this.contactId,
       };
+      this.disableButton = true;
 
       this.contactFormService
         .updateContact(updateData)
         .subscribe(res => {
+          this.disableButton = false;
+
           this.notifierService.notify(
             'success',
             'Contact updated successfully!'

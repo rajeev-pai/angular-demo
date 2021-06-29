@@ -12,6 +12,7 @@ import { AuthService } from '../auth.service';
 export class LoginComponent {
   loginError = false;
   showPassword = false;
+  disableButton = false;
 
   constructor(
     private authService: AuthService,
@@ -19,6 +20,8 @@ export class LoginComponent {
   ) {  }
 
   onLogin(form: NgForm) {
+    this.disableButton = true;
+
     this.authService
       .login(form.value)
       .subscribe(
@@ -27,6 +30,7 @@ export class LoginComponent {
         },
         err => {
           this.loginError = true;
+          this.disableButton = false;
           console.log('Login failed: ', err);
         }
       );

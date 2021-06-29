@@ -39,11 +39,11 @@ interface ModalData {
   styleUrls: ['./transaction-form.component.scss']
 })
 export class TransactionFormComponent extends FormCanDeactivate implements OnInit, OnDestroy {
-
   formModel: TransactionFormField[] = [];
   form!: FormGroup;
   title = 'New Transaction';
   submitButtonText = 'Save';
+  disableButton = false;
 
   private contactSubscription!: Subscription;
 
@@ -161,9 +161,12 @@ export class TransactionFormComponent extends FormCanDeactivate implements OnIni
 
     switch (this.data.mode) {
       case 'create':
+        this.disableButton = true;
+
         this.txnFormService
           .createNewTransaction(submitData)
           .subscribe(_ => {
+            this.disableButton = false;
             this.notifierService.notify(
               'success',
               'New transaction created successfully!'
@@ -178,9 +181,13 @@ export class TransactionFormComponent extends FormCanDeactivate implements OnIni
         break;
 
       case 'edit':
+        this.disableButton = true;
+
         this.txnFormService
           .updateTransaction(this.data.transaction!.id, submitData)
           .subscribe(_ => {
+            this.disableButton = false;
+
             this.notifierService.notify(
               'success',
               'Transaction updated successfully!'
