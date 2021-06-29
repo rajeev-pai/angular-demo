@@ -8,6 +8,7 @@ import { ContactViewComponent } from './contact-view.component';
 import { ContactViewRoutingModule } from './contact-view-routing.module';
 import { TransactionModule } from '../../transactions/transaction/transaction.module';
 import { TransactionFormModule } from '../../transactions/transaction-form/transaction-form.module';
+import { SharedModule } from '../../../../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { TransactionFormModule } from '../../transactions/transaction-form/trans
     ContactViewRoutingModule,
     TransactionModule,
     TransactionFormModule,
+    SharedModule,
   ]
 })
 export class ContactViewModule { }

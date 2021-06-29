@@ -40,11 +40,11 @@ import { HttpDelayInterceptor } from './utils/interceptors/delay.interceptor';
       useClass: AuthHeaderInterceptor, 
       multi: true,
     },
-    // {
-    //   provide: HTTP_INTERCEPTORS,
-    //   useClass: HttpDelayInterceptor,
-    //   multi: true,
-    // }
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpDelayInterceptor,
+      multi: true,
+    }
   ],
   bootstrap: [AppComponent]
 })

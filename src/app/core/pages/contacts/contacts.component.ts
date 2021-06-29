@@ -10,6 +10,7 @@ import { ContactData } from '../../../helpers/types';
 })
 export class ContactsComponent implements OnInit {
   contacts: ContactData[] = [];
+  isLoading = false;
 
   constructor(
     private contactsService: ContactsService,
@@ -24,9 +25,12 @@ export class ContactsComponent implements OnInit {
   }
 
   fetchContacts() {
+    this.isLoading = true;
+
     this.contactsService
       .fetchContacts()
       .subscribe(res => {
+        this.isLoading = false;
         this.contacts = res.contacts;
       });
   }

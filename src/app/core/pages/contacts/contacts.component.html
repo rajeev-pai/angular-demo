@@ -4,9 +4,11 @@
       routerLink="/new-contact">Create Contact</button>
   </mm-page-header>
 
-  <div class="contacts">
+  <div class="contacts" *ngIf="!isLoading">
     <mm-contact [contactToDisplay]="contact" (refresh)="fetchContacts()"
       *ngFor="let contact of contacts; last as isLast;" [isLast]="isLast">
     </mm-contact>
   </div>
+
+  <mm-spinner *ngIf="isLoading"></mm-spinner>
 </div>

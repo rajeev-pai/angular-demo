@@ -18,6 +18,7 @@ export class TransactionsComponent implements OnInit, OnDestroy {
   email = '';
   youOwe = 0;
   owesYou = 0;
+  isLoading = false;
 
   private subscription!: Subscription;
 
@@ -45,9 +46,12 @@ export class TransactionsComponent implements OnInit, OnDestroy {
   }
 
   fetchTransactions() {
+    this.isLoading = true;
+
     this.transactionService
       .fetchTransactionsOfAccount()
       .subscribe(res => {
+        this.isLoading = false;
         this.transactions = res.transactions;
       });
   }

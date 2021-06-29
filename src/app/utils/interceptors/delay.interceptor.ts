@@ -16,12 +16,16 @@ export class HttpDelayInterceptor implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
 
-    return of(null)
-      .pipe(mergeMap(() => {
-        return next.handle(req);
-      }))
-      .pipe(materialize())
-      .pipe(delay(700))
-      .pipe(dematerialize());
+    if (req.url.includes('/api')) {
+      return of(null)
+        .pipe(mergeMap(() => {
+          return next.handle(req);
+        }))
+        .pipe(materialize())
+        .pipe(delay(1000))
+        .pipe(dematerialize());
+    }
+
+    return next.handle(req);
   }
 }

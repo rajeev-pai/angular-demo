@@ -18,6 +18,8 @@ export class ContactViewComponent implements OnInit {
   transactions: Transaction[] = [];
   youOwe = 0;
   owesYou = 0;
+  isLoadingContact = false;
+  isLoadingTransaction = false;
 
   private contactId!: number;
 
@@ -58,9 +60,12 @@ export class ContactViewComponent implements OnInit {
   }
 
   private fetchContact() {
+    this.isLoadingContact = true;
+
     this.contactsService
       .fetchContactById(this.contactId)
       .subscribe(contact => {
+        this.isLoadingContact = false;
         this.contact = contact;
         this.youOwe = contact.youOwe;
         this.owesYou = contact.owesYou;
@@ -68,9 +73,12 @@ export class ContactViewComponent implements OnInit {
   }
 
   private fetchTransactions() {
+    this.isLoadingTransaction = true;
+
     this.transactionService
       .fetchTransactionsOfContact(this.contactId)
       .subscribe(res => {
+        this.isLoadingTransaction = false;
         this.transactions = res.transactions;
       });
   }
