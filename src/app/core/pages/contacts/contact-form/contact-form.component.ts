@@ -2,6 +2,8 @@ import { Component, ViewChild, OnInit } from '@angular/core';
 import { AbstractControl, NgForm } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 
+import { NotifierService } from 'angular-notifier';
+
 import { ContactFormService } from './contact-form.service';
 import { ContactsService } from '../contacts.service';
 import { UpdateContactData } from '../../../../helpers/types';
@@ -26,6 +28,7 @@ export class ContactFormComponent extends FormCanDeactivate implements OnInit {
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private contactsService: ContactsService,
+    private notifierService: NotifierService,
   ) {
     super();
   }
@@ -60,6 +63,11 @@ export class ContactFormComponent extends FormCanDeactivate implements OnInit {
       this.contactFormService
         .createContact(this.form.value)
         .subscribe(res => {
+          this.notifierService.notify(
+            'success',
+            'Contact created successfully!'
+          );
+
           this.form.reset();
           this.router.navigateByUrl('/contacts');
         });
@@ -72,6 +80,11 @@ export class ContactFormComponent extends FormCanDeactivate implements OnInit {
       this.contactFormService
         .updateContact(updateData)
         .subscribe(res => {
+          this.notifierService.notify(
+            'success',
+            'Contact updated successfully!'
+          );
+
           this.form.reset();
           this.router.navigateByUrl('/contacts');
         });

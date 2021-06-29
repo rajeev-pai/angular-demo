@@ -6,6 +6,7 @@ import {
 } from '@angular/core';
 
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { NotifierService } from 'angular-notifier';
 
 import {
   Transaction,
@@ -37,6 +38,7 @@ export class TransactionComponent {
     private contactsService: ContactsService,
     private matDialog: MatDialog,
     private transactionsService: TransactionsService,
+    private notifierService: NotifierService,
   ) { }
 
   get owesYou(): boolean {
@@ -127,6 +129,11 @@ export class TransactionComponent {
     this.transactionsService
       .deleteTransaction(this.txn.id)
       .subscribe(res => {
+        this.notifierService.notify(
+          'success',
+          'Transaction deleted successfully!'
+        );
+
         if (res.success) {
           this.deleteModalRef.close();
           this.refreshList.emit();

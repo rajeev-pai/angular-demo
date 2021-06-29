@@ -24,7 +24,14 @@ import { HttpDelayInterceptor } from './utils/interceptors/delay.interceptor';
     // CoreModule,
     AppRoutingModule,
     HttpClientModule,
-    NotifierModule,
+    NotifierModule.withConfig({
+      position: {
+        vertical: {
+          position: 'top',
+          distance: 80
+        }
+      }
+    }),
   ],
   providers: [
     CookieService,

@@ -16,6 +16,7 @@ import {
 import { Subscription } from 'rxjs';
 
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { NotifierService } from 'angular-notifier';
 
 import { TransactionFormService } from './transaction-form.service';
 import { ContactsService } from '../../contacts/contacts.service';
@@ -52,6 +53,7 @@ export class TransactionFormComponent extends FormCanDeactivate implements OnIni
     private contactsService: ContactsService,
     @Inject(MAT_DIALOG_DATA) public data: ModalData,
     private dialogRef: MatDialogRef<TransactionFormComponent>,
+    private notifierService: NotifierService,
   ) {
     super();
   }
@@ -146,8 +148,10 @@ export class TransactionFormComponent extends FormCanDeactivate implements OnIni
       type
     } = this.form.value;
 
+    console.log(this.form.value);
+
     const submitData: CreateOrUpdateTransactionData = {
-      contactId,
+      contactId: contactId ? contactId : this.data.contactId,
       type,
       amount: +amount,
       note,
@@ -160,6 +164,11 @@ export class TransactionFormComponent extends FormCanDeactivate implements OnIni
         this.txnFormService
           .createNewTransaction(submitData)
           .subscribe(_ => {
+            this.notifierService.notify(
+              'success',
+              'New transaction created successfully!'
+            );
+
             if (this.data.afterCreate) {
               this.data.afterCreate();
             }
@@ -172,6 +181,11 @@ export class TransactionFormComponent extends FormCanDeactivate implements OnIni
         this.txnFormService
           .updateTransaction(this.data.transaction!.id, submitData)
           .subscribe(_ => {
+            this.notifierService.notify(
+              'success',
+              'Transaction updated successfully!'
+            );
+
             if (this.data.afterCreate) {
               this.data.afterCreate();
             }
