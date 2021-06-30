@@ -1,0 +1,12 @@
+<div class="container">
+  <h2>Session expired!</h2>
+  <mat-dialog-content>Do you want to refresh the session?</mat-dialog-content>
+
+  <mat-dialog-actions>
+    <button mat-button color="warn" (click)="onCancel()">No</button>
+
+    <button mat-flat-button color="accent" (click)="onConfirm()">
+      Yes, please
+    </button>
+  </mat-dialog-actions>
+</div>

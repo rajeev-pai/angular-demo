@@ -5,6 +5,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { CookieService } from 'ngx-cookie-service';
 import { NotifierModule } from 'angular-notifier';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { AppComponent } from './app.component';
 // import { AuthModule } from './auth/auth.module';
@@ -32,6 +33,7 @@ import { HttpDelayInterceptor } from './utils/interceptors/delay.interceptor';
         }
       }
     }),
+    MatDialogModule,
   ],
   providers: [
     CookieService,
@@ -40,11 +42,11 @@ import { HttpDelayInterceptor } from './utils/interceptors/delay.interceptor';
       useClass: AuthHeaderInterceptor, 
       multi: true,
     },
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: HttpDelayInterceptor,
-      multi: true,
-    }
+    // {
+    //   provide: HTTP_INTERCEPTORS,
+    //   useClass: HttpDelayInterceptor,
+    //   multi: true,
+    // }
   ],
   bootstrap: [AppComponent]
 })

@@ -4,19 +4,25 @@
       <a class="badge" routerLink="/app">Money Manager</a>
 
       <div class="links">
-        <a class="link" *ngFor="let link of links" [routerLink]="link.path" routerLinkActive="active">{{ link.name }}</a>
+        <a class="link" *ngFor="let link of links" [routerLink]="link.path"
+          routerLinkActive="active">{{ link.name }}</a>
       </div>
 
-      <div class="user_details" [matMenuTriggerFor]="menu">
-        <div class="user_badge">{{ username | avatar }}</div>
-        <div class="user_name">{{ username }}</div>
-        <mat-icon>arrow_drop_down</mat-icon>
-      </div>
+      <div class="at_the_end">
+        <span class="session_time">Time remaining: {{ remainingSessionTime
+          }}</span>
 
-      <mat-menu #menu="matMenu">
-        <button mat-menu-item routerLink="/settings">Settings</button>
-        <button mat-menu-item (click)="onLogout()">Logout</button>
-      </mat-menu>
+        <div class="user_details" [matMenuTriggerFor]="menu">
+          <div class="user_badge">{{ username | avatar }}</div>
+          <div class="user_name">{{ username }}</div>
+          <mat-icon>arrow_drop_down</mat-icon>
+        </div>
+
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item routerLink="/settings">Settings</button>
+          <button mat-menu-item (click)="onLogout()">Logout</button>
+        </mat-menu>
+      </div>
     </div>
   </mat-toolbar>
 
