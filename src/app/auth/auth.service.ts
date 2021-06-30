@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Observable, BehaviorSubject, Subject } from 'rxjs';
 import { tap } from 'rxjs/operators';
@@ -21,6 +21,7 @@ import {
   CHECK_AUTH,
   GET_ACCOUNT_DETAILS,
   UPDATE_USERNAME,
+  USERNAME_AVAILABLITY,
 } from '../helpers/apis';
 
 const AUTH_KEY = 'auth';
@@ -71,6 +72,15 @@ export class AuthService {
 
   checkAuthValidity() {
     return this.http.get(CHECK_AUTH) as Observable<{ auth: boolean; }>;
+  }
+
+  checkUsernameAvailability(username: string) {
+    const params = new HttpParams().appendAll({
+      username
+    });
+
+    return this.http
+      .get<{ available: boolean; }>(USERNAME_AVAILABLITY, { params });
   }
 
   getAccountDetails() {
