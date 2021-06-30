@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Observable, BehaviorSubject, Subject, of } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { tap, map, catchError } from 'rxjs/operators';
 
 import { MatDialog } from '@angular/material/dialog';
 import { CookieService } from 'ngx-cookie-service';
@@ -23,6 +23,7 @@ import {
   CHECK_AUTH,
   GET_ACCOUNT_DETAILS,
   UPDATE_USERNAME,
+  USERNAME_AVAILABLITY,
 } from '../helpers/apis';
 
 const AUTH_KEY = 'ak';
@@ -82,7 +83,24 @@ export class AuthService {
   }
 
   signUp(data: SignUpFormData) {
-    return this.http.post(SIGNUP, data);
+    return this.http
+      .post(SIGNUP, data)
+      .pipe(
+        map(res => {
+          return {
+            success: true,
+            data: res,
+            error: null
+          };
+        }),
+        catchError(err => {
+          return of({
+            success: false,
+            data: null,
+            error: err.error.errors
+          });
+        }),
+      );
   }
 
   getAuthToken() {
@@ -91,6 +109,15 @@ export class AuthService {
 
   checkAuthValidity() {
     return this.http.get(CHECK_AUTH) as Observable<{ auth: boolean; }>;
+  }
+
+  checkUsernameAvailability(username: string) {
+    const params = new HttpParams().appendAll({
+      username
+    });
+
+    return this.http
+      .get<{ available: boolean; }>(USERNAME_AVAILABLITY, { params });
   }
 
   getAccountDetails() {

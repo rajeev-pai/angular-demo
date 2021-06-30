@@ -11,8 +11,11 @@ import {
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
+import { NotifierService } from 'angular-notifier';
+
 import { AuthService } from '../auth.service';
 import { FormCanDeactivate } from '../../utils/guards/form-alert/form-can-deactivate';
+
 import {
   PasswordValidators,
   StrongPasswordErrors,
@@ -42,6 +45,9 @@ export class SignUpComponent extends FormCanDeactivate implements OnInit, OnDest
       [
         Validators.required,
         UsernameValidators.cannotContainSpace,
+      ],
+      [
+        this.usernameValidators.taken
       ]
     ),
     password: new FormControl(
@@ -59,6 +65,8 @@ export class SignUpComponent extends FormCanDeactivate implements OnInit, OnDest
   constructor(
     private authService: AuthService,
     private router: Router,
+    private notifierService: NotifierService,
+    private usernameValidators: UsernameValidators,
   ) {
     super();
   }
@@ -110,6 +118,10 @@ export class SignUpComponent extends FormCanDeactivate implements OnInit, OnDest
       return 'Invalid email!';
     }
 
+    if (this.email.hasError('taken')) {
+      return 'This email is already taken!';
+    }
+
     return null;
   }
 
@@ -120,6 +132,10 @@ export class SignUpComponent extends FormCanDeactivate implements OnInit, OnDest
 
     if (this.username.hasError('cannotContainSpace')) {
       return 'Should not contain spaces!';
+    }
+
+    if (this.username.hasError('taken')) {
+      return 'This username is already taken!';
     }
 
     return null;
@@ -180,13 +196,42 @@ export class SignUpComponent extends FormCanDeactivate implements OnInit, OnDest
       this.authService
         .signUp(this.signUpForm.value)
         .subscribe(
-          _ => {
+          // _ => {
+          //   this.notifierService.notify(
+          //     'success',
+          //     'Account created successfully!'
+          //   );
+
+          //   this.signUpInProgress = false;
+          //   this.resetSignUpForm();
+          //   this.router.navigateByUrl('/login');
+          // },
+          // err => {
+          //   this.signUpInProgress = false;
+
+          //   if (err.error.errors.email) {
+          //     this.email.setErrors({ taken: true })
+          //   }
+          // }
+
+          res => {
             this.signUpInProgress = false;
-            this.resetSignUpForm();
-            this.router.navigateByUrl('/login');
-          },
-          err => {
-            console.log('Err:', err);
+
+            if (res.success) {
+              this.notifierService.notify(
+                'success',
+                'Account created successfully!'
+              );
+
+              this.resetSignUpForm();
+              this.router.navigateByUrl('/login');
+            } else {
+              if (res.error) {
+                if (res.error.email) {
+                  this.email.setErrors({ taken: true })
+                }
+              }
+            }
           }
         );
     }

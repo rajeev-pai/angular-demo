@@ -20,6 +20,12 @@
       <input formControlName="username" required type="text" matInput
         placeholder="Username">
 
+      <button type="button" mat-icon-button matSuffix *ngIf="username.pending">
+        <mat-icon>
+          pending
+        </mat-icon>
+      </button>
+
       <mat-error *ngIf="username.touched && username.invalid">
         <span>{{ getUsernameError() }}</span>
       </mat-error>
