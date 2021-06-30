@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { Observable, BehaviorSubject, Subject } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { Observable, BehaviorSubject, Subject, of } from 'rxjs';
+import { tap, map, catchError } from 'rxjs/operators';
 
 import { CookieService } from 'ngx-cookie-service';
 
@@ -63,7 +63,24 @@ export class AuthService {
   }
 
   signUp(data: SignUpFormData) {
-    return this.http.post(SIGNUP, data);
+    return this.http
+      .post(SIGNUP, data)
+      .pipe(
+        map(res => {
+          return {
+            success: true,
+            data: res,
+            error: null
+          };
+        }),
+        catchError(err => {
+          return of({
+            success: false,
+            data: null,
+            error: err.error.errors
+          });
+        }),
+      );
   }
 
   getAuthToken() {
