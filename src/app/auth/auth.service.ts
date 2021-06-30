@@ -68,8 +68,8 @@ export class AuthService {
           
           // 60 seconds.
           // Obtained from the backend.
-          const refreshDuration = 100 * 1000;
-          this.refreshAt = Date.now() + refreshDuration;
+          const refreshDuration = 10 * 1000;
+          // this.refreshAt = Date.now() + refreshDuration;
           this.refreshToken = this.getRefreshToken();
           this.setAutoLogoutTime(refreshDuration);
           this.setAuthKey(res.token);
@@ -165,7 +165,7 @@ export class AuthService {
       .pipe(
         tap(res => {
           // New expiry duration obtained from backend.
-          const newRefreshDuration = 100 * 1000;
+          const newRefreshDuration = 10 * 1000;
           this.refreshToken = this.getRefreshToken();
           this.setAutoLogoutTime(newRefreshDuration);
           this.setAuthKey(this.authToken!);
@@ -200,9 +200,8 @@ export class AuthService {
       return;
     }
 
-    const currentTime = Date.now();
     // Add the duration to current time (in milliseconds).
-    this.refreshAt = currentTime + durationInMs;
+    this.refreshAt = Date.now() + durationInMs;
     this.startAutoLogoutTimer();
   }
 
@@ -222,7 +221,7 @@ export class AuthService {
     }
 
     // Convert milliseconds to seconds.
-    let timeLeftInSeconds = (timeLeftInMilliseconds) / 1000;
+    let timeLeftInSeconds = timeLeftInMilliseconds / 1000;
 
     // Broadcast the remaining time after formatting.
     this.sessionTimeSubject.next(this.getFormattedTime(timeLeftInSeconds));
